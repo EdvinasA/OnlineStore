@@ -8,16 +8,10 @@ import javax.validation.constraints.Min;
 
 @Entity
 @Data
-public class PurchaseOrderLine {
-
+public class ProductStorage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "purchase_order_id", nullable = false)
-    private PurchaseOrder purchaseOrder;
 
     @ManyToOne
     @JsonIgnore
@@ -26,4 +20,5 @@ public class PurchaseOrderLine {
 
     @Min(value = 0, message = "Quantity cannot be < 0")
     private Double quantity;
+
 }
