@@ -24,6 +24,6 @@ public class PurchaseOrderLine {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    @Min(value = 0, message = "Quantity cannot be < 0")
+    //@Min(value = 0, message = "Quantity cannot be < 0")
     private Double quantity;
 }
