@@ -4,7 +4,7 @@ package sda.store.onlinestore.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import main.java.sda.store.onlinestore.model.Product;
+import sda.store.onlinestore.model.Product;
 import sda.store.onlinestore.model.ProductDTO;
 import sda.store.onlinestore.repository.ProductRepository;
 

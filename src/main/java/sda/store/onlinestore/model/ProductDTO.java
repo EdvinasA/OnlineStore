@@ -3,10 +3,6 @@ package sda.store.onlinestore.model;
 import lombok.Data;
 
 import javax.persistence.Entity;
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
-
 
 @Data
 

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sda.store.onlinestore.model.ProductDTO;
 import sda.store.onlinestore.service.ProductService;
-import main.java.sda.store.onlinestore.model.Product;
+import sda.store.onlinestore.model.Product;
 
 @RequestMapping(value = "/products")
 @RestController
