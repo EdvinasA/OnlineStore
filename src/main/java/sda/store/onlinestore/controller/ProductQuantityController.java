@@ -28,4 +28,11 @@ public class ProductQuantityController {
         return productQuantityService.getAllProductQuantity(date);
     }
 
+    @GetMapping(value = "/id")
+    public Double getProductQuantityById(@RequestParam("date")
+                                             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+                                         @RequestParam("productId") Long productId){
+        return productQuantityService.getProductQuantityById(date, productId);
+    }
+
 }

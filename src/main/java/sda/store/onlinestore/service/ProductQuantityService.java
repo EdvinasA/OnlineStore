@@ -35,7 +35,7 @@ public class ProductQuantityService {
 
     public List<ProductQuantityResponse> getAllProductQuantity(LocalDate date) {
         List<ProductQuantityResponse> productQuantityResponses = new ArrayList<>();
-        List<Object[]> productAndQuantityObj = productQuantityRepository.findAllProductStorages(date);
+        List<Object[]> productAndQuantityObj = productQuantityRepository.findAllProductQuantities(date);
         for (Object[] o: productAndQuantityObj) {
             ProductQuantityResponse productQuantityResponse = new ProductQuantityResponse();
 
@@ -48,5 +48,9 @@ public class ProductQuantityService {
             productQuantityResponses.add(productQuantityResponse);
         }
         return productQuantityResponses;
+    }
+
+    public Double getProductQuantityById(LocalDate date, Long productId) {
+        return productQuantityRepository.findProductQuantityById(date, productId);
     }
 }
