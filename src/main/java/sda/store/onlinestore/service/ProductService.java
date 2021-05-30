@@ -8,6 +8,8 @@ import sda.store.onlinestore.model.Product;
 import sda.store.onlinestore.model.ProductDTO;
 import sda.store.onlinestore.repository.ProductRepository;
 
+import java.util.List;
+
 @Service
 public class ProductService {
 
@@ -27,5 +29,9 @@ public class ProductService {
         product.setType(productDTO.getType());
         productRepository.save(product);
         return product;
+    }
+
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
     }
 }
