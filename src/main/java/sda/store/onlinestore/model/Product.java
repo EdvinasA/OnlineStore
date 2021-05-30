@@ -4,6 +4,7 @@ import lombok.Data;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -29,9 +30,9 @@ public class Product {
     private String type;
 
 
-   /* @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product")
     private List<PurchaseOrderLine> purchaseOrderLines;
 
     @OneToMany(mappedBy = "product")
-    private List<ProductStorage> productStorages; */
+    private List<ProductStorage> productStorages;
 }
