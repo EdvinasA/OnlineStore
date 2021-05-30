@@ -3,7 +3,6 @@ package sda.store.onlinestore.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sda.store.onlinestore.model.*;
-import sda.store.onlinestore.repository.CartRepository;
 import sda.store.onlinestore.repository.ProductRepository;
 import sda.store.onlinestore.repository.PurchaseOrderLineRepository;
 import sda.store.onlinestore.repository.PurchaseOrderRepository;
