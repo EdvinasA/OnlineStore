@@ -30,4 +30,14 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
+    @GetMapping(value = "/id")
+    public Product getProductById(Long id) {
+        return productService.getProductById(id);
+    }
+
+    @GetMapping(value = "/product")
+    public Product getProductByTitle(String title) {
+        return productService.getProductByTitle(title);
+    }
+
 }
