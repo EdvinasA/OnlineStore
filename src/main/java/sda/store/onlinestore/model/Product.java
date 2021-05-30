@@ -4,6 +4,7 @@ import lombok.Data;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -13,25 +14,17 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     private String title;
-
 
     private String description;
 
-
     private Double price;
 
-
-    private Double quantity;
-
-
-    private String type;
-
-
-   /* @OneToMany(mappedBy = "product")
-    private List<PurchaseOrderLine> purchaseOrderLines;
+    private ProductType productType;
 
     @OneToMany(mappedBy = "product")
-    private List<ProductStorage> productStorages; */
+    private List<ProductStorage> productStorages;
+
+   /* @OneToMany(mappedBy = "product")
+    private List<PurchaseOrderLine> purchaseOrderLines;*/
 }

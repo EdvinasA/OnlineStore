@@ -3,6 +3,8 @@ package sda.store.onlinestore.model;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Data
 public class ProductDTO {
@@ -13,7 +15,8 @@ public class ProductDTO {
 
     private Double price;
 
-    private Double quantity;
+    private ProductType productType;
 
-      private String type;
+    @OneToMany(mappedBy = "product")
+    private List<ProductStorage> productStorages;
 }
