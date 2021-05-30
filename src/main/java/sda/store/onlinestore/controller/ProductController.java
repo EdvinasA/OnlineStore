@@ -9,7 +9,8 @@ import sda.store.onlinestore.service.ProductService;
 
 import java.util.List;
 
-@RequestMapping(value = "/products")
+@RequestMapping(value = "/product")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class ProductController {
 
