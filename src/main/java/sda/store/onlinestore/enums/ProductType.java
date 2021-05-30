@@ -1,4 +1,4 @@
-package sda.store.onlinestore.model;
+package sda.store.onlinestore.enums;
 
 public enum ProductType {
     COMPUTER,

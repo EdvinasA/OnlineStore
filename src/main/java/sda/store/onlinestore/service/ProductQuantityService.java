@@ -2,6 +2,7 @@ package sda.store.onlinestore.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sda.store.onlinestore.enums.ProductType;
 import sda.store.onlinestore.model.Product;
 import sda.store.onlinestore.model.ProductQuantity;
 import sda.store.onlinestore.model.ProductQuantityDTO;
@@ -33,7 +34,7 @@ public class ProductQuantityService {
         return productQuantity;
     }
 
-    public List<ProductQuantityResponse> getAllProductQuantity(LocalDate date) {
+    /*public List<ProductQuantityResponse> getAllProductQuantity(LocalDate date) {
         List<ProductQuantityResponse> productQuantityResponses = new ArrayList<>();
         List<Object[]> productAndQuantityObj = productQuantityRepository.findAllProductQuantities(date);
         for (Object[] o: productAndQuantityObj) {
@@ -43,6 +44,26 @@ public class ProductQuantityService {
             Product product = productOpt.orElseThrow(() -> new RuntimeException("Product was not found"));
             productQuantityResponse.setProduct(product);
 
+            productQuantityResponse.setQuantity((Double) o[1]);
+            productQuantityResponse.setOnDate(date);
+            productQuantityResponses.add(productQuantityResponse);
+        }
+        return productQuantityResponses;
+    }*/
+
+    public List<ProductQuantityResponse> getAllProductQuantity(LocalDate date) {
+        List<ProductQuantityResponse> productQuantityResponses = new ArrayList<>();
+        List<Object[]> productAndQuantityObj = productQuantityRepository.findAllProductQuantities(date);
+        for (Object[] o: productAndQuantityObj) {
+            ProductQuantityResponse productQuantityResponse = new ProductQuantityResponse();
+
+            Optional<Product> productOpt = productRepository.findById((Long) o[0]);
+            Product product = productOpt.orElseThrow(() -> new RuntimeException("Product was not found"));
+
+            productQuantityResponse.setTitle(product.getTitle());
+            productQuantityResponse.setDescription(product.getDescription());
+            productQuantityResponse.setPrice(product.getPrice());
+            productQuantityResponse.setProductType(product.getProductType());
             productQuantityResponse.setQuantity((Double) o[1]);
             productQuantityResponse.setOnDate(date);
             productQuantityResponses.add(productQuantityResponse);
