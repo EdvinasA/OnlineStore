@@ -23,10 +23,7 @@ public class Product {
     private Double price;
 
 
-    private Double quantity;
-
-
-    private String type;
+    private ProductType type;
 
 
    /* @OneToMany(mappedBy = "product")

@@ -8,7 +8,7 @@ spring:
     username: sa
     password:
     driverClassName: org.h2.Driver
-#    initialization-mode: always
+    initialization-mode: always
   jpa:
     hibernate:
       ddl-auto: create-drop

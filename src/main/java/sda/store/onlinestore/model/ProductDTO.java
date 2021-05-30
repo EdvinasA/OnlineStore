@@ -13,7 +13,5 @@ public class ProductDTO {
 
     private Double price;
 
-    private Double quantity;
-
-      private String type;
+      private ProductType type;
 }
