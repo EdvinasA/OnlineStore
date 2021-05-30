@@ -25,13 +25,21 @@ public class ProductService {
         product.setTitle(productDTO.getTitle());
         product.setDescription(productDTO.getDescription());
         product.setPrice(productDTO.getPrice());
-        product.setQuantity(productDTO.getQuantity());
-        product.setType(productDTO.getType());
+        product.setProductType(productDTO.getProductType());
+        product.setProductStorages(productDTO.getProductStorages());
         productRepository.save(product);
         return product;
     }
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();
+    }
+
+    public Product getProductById(Long id) {
+        return productRepository.findProductById(id);
+    }
+
+    public Product getProductByTitle(String title) {
+        return productRepository.findProductByTitle(title);
     }
 }

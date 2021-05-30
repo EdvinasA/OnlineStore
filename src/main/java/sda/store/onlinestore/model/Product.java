@@ -14,21 +14,16 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     private String title;
-
 
     private String description;
 
-
     private Double price;
 
+    private ProductType productType;
 
-    private Double quantity;
-
-
-    private String type;
-
+    @OneToMany(mappedBy = "product")
+    private List<ProductStorage> productStorages;
 
     @OneToMany(mappedBy = "product")
     private List<PurchaseOrderLine> purchaseOrderLines;
