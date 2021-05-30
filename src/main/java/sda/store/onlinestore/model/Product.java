@@ -23,9 +23,6 @@ public class Product {
     private ProductType productType;
 
     @OneToMany(mappedBy = "product")
-    private List<ProductStorage> productStorages;
-
-    @OneToMany(mappedBy = "product")
     private List<PurchaseOrderLine> purchaseOrderLines;
 
     @OneToMany(mappedBy = "product")
