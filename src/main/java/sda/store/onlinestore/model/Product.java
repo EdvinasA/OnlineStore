@@ -34,5 +34,5 @@ public class Product {
     private List<PurchaseOrderLine> purchaseOrderLines;
 
     @OneToMany(mappedBy = "product")
-    private List<ProductStorage> productStorages;
+    private List<ProductQuantity> productQuantities;
 }

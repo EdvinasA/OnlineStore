@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-public class ProductStorage {
+public class ProductQuantity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,6 +23,6 @@ public class ProductStorage {
     //@Min(value = 0, message = "Quantity cannot be < 0")
     private Double quantity;
 
-    //@FutureOrPresent(message = "Storage date should be today or the future")
+    //@FutureOrPresent(message = "Quantity date should be today or the future")
     private LocalDate date;
 }
