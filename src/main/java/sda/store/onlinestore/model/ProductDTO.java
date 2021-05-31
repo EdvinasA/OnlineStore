@@ -2,8 +2,6 @@ package sda.store.onlinestore.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-
 @Data
 public class ProductDTO {
 
@@ -13,7 +11,5 @@ public class ProductDTO {
 
     private Double price;
 
-    private Double quantity;
-
-      private String type;
+    private ProductType type;
 }

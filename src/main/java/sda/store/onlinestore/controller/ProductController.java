@@ -10,6 +10,7 @@ import sda.store.onlinestore.model.Product;
 import java.util.List;
 
 @RequestMapping(value = "/products")
+@CrossOrigin(value = "http://localhost:4200/", allowedHeaders = "*")
 @RestController
 public class ProductController {
 
@@ -25,7 +26,7 @@ public class ProductController {
         return productService.newProductRegistration(productDTO);
     }
 
-    @GetMapping(value = "/get-all")
+    @GetMapping(value = "/get-all/")
     public List<Product> getAllProducts() {
         return productService.getAllProducts();
     }
