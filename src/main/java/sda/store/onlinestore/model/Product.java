@@ -24,6 +24,9 @@ public class Product {
     private ProductType productType;
 
     @OneToMany(mappedBy = "product")
+    private List<Cart> carts;
+
+    @OneToMany(mappedBy = "product")
     private List<PurchaseOrderLine> purchaseOrderLines;
 
     @OneToMany(mappedBy = "product")
