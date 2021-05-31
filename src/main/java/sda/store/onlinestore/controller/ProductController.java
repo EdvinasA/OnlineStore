@@ -10,7 +10,7 @@ import sda.store.onlinestore.service.ProductService;
 import java.util.List;
 
 @RequestMapping(value = "/product")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 @RestController
 public class ProductController {
 
