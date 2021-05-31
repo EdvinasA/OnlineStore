@@ -4,13 +4,13 @@ package sda.store.onlinestore.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sda.store.onlinestore.model.ProductDTO;
-import sda.store.onlinestore.service.ProductService;
 import sda.store.onlinestore.model.Product;
+import sda.store.onlinestore.service.ProductService;
 
 import java.util.List;
 
-@RequestMapping(value = "/products")
-@CrossOrigin(value = "http://localhost:4200/", allowedHeaders = "*")
+@RequestMapping(value = "/product")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class ProductController {
 
@@ -26,9 +26,19 @@ public class ProductController {
         return productService.newProductRegistration(productDTO);
     }
 
-    @GetMapping(value = "/get-all/")
+    @GetMapping(value = "/get-all")
     public List<Product> getAllProducts() {
         return productService.getAllProducts();
+    }
+
+    @GetMapping(value = "/id")
+    public Product getProductById(Long id) {
+        return productService.getProductById(id);
+    }
+
+    @GetMapping(value = "/product")
+    public Product getProductByTitle(String title) {
+        return productService.getProductByTitle(title);
     }
 
 }
