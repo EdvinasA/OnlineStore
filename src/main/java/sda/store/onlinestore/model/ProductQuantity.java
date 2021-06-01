@@ -10,6 +10,7 @@ import java.time.LocalDate;
 
 @Entity
 @Data
+@Table(name = "product_quantity")
 public class ProductQuantity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
