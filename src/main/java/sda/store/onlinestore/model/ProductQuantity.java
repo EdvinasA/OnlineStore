@@ -10,13 +10,13 @@ import java.time.LocalDate;
 
 @Entity
 @Data
+@Table(name = "product_quantity")
 public class ProductQuantity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 

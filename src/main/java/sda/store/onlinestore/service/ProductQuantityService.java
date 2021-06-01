@@ -34,7 +34,19 @@ public class ProductQuantityService {
         return productQuantity;
     }
 
-    /*public List<ProductQuantityResponse> getAllProductQuantity(LocalDate date) {
+    public List<ProductQuantity> getAllProductQuantity() {
+        return productQuantityRepository.findAll();
+    }
+
+    public ProductQuantity getProductQuantityById(Long productQuantityId) {
+        Optional<ProductQuantity> productQuantityOpt = productQuantityRepository.findById(productQuantityId);
+        return productQuantityOpt.orElseThrow(() -> new RuntimeException("Product quantity was not found"));
+    }
+
+
+
+
+    /*public List<ProductQuantityResponse> getAllProductQuantityOnDate(LocalDate date) {
         List<ProductQuantityResponse> productQuantityResponses = new ArrayList<>();
         List<Object[]> productAndQuantityObj = productQuantityRepository.findAllProductQuantities(date);
         for (Object[] o: productAndQuantityObj) {
@@ -51,7 +63,7 @@ public class ProductQuantityService {
         return productQuantityResponses;
     }*/
 
-    public List<ProductQuantityResponse> getAllProductQuantity(LocalDate date) {
+    public List<ProductQuantityResponse> getAllProductQuantityOnDate(LocalDate date) {
         List<ProductQuantityResponse> productQuantityResponses = new ArrayList<>();
         List<Object[]> productAndQuantityObj = productQuantityRepository.findAllProductQuantities(date);
         for (Object[] o: productAndQuantityObj) {
@@ -60,6 +72,7 @@ public class ProductQuantityService {
             Optional<Product> productOpt = productRepository.findById((Long) o[0]);
             Product product = productOpt.orElseThrow(() -> new RuntimeException("Product was not found"));
 
+            productQuantityResponse.setProduct(product);
             productQuantityResponse.setTitle(product.getTitle());
             productQuantityResponse.setDescription(product.getDescription());
             productQuantityResponse.setPrice(product.getPrice());
@@ -71,7 +84,7 @@ public class ProductQuantityService {
         return productQuantityResponses;
     }
 
-    public Double getProductQuantityById(LocalDate date, Long productId) {
+    public Double etQuantityByProductIdOnDate(LocalDate date, Long productId) {
         return productQuantityRepository.findProductQuantityById(date, productId);
     }
 }

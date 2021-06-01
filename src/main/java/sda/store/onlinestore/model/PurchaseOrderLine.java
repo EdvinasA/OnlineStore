@@ -20,7 +20,6 @@ public class PurchaseOrderLine {
     private PurchaseOrder purchaseOrder;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 

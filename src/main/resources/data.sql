@@ -8,3 +8,11 @@ VALUES (1, 'Dell XP 15266', 'Computer', 966.66, 1),
        (7, 'Slipers', 'cosy and warm', 20.00, 2),
        (8, 'Slipers', 'cosy and warm', 20.00, 2),
        (9, 'Slipers', 'cosy and warm', 20.00, 2);
+
+
+insert into product_quantity (ID, PRODUCT_ID, QUANTITY, DATE)
+values (1, 1, 20.00, '2021-05-31');
+
+insert into cart (ID, PRODUCT_ID, QUANTITY)
+values (1, 1, 3),
+       (2, 2, 5);
