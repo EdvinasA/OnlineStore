@@ -2,12 +2,15 @@ package sda.store.onlinestore.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import sda.store.onlinestore.model.ProductDTO;
 import sda.store.onlinestore.model.Product;
 import sda.store.onlinestore.service.ProductService;
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @RequestMapping(value = "/product")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -31,14 +34,20 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-    @GetMapping(value = "/id")
-    public Product getProductById(Long id) {
+    @GetMapping(value = "/{id}")
+    public Product getProductById(@PathVariable("id") Long id) {
         return productService.getProductById(id);
     }
 
-    @GetMapping(value = "/product")
-    public Product getProductByTitle(String title) {
-        return productService.getProductByTitle(title);
+    @GetMapping(value = "/product-title")
+    public List<Product> getProductsByTitle(String title) {
+        return productService.getProductsByTitle(title);
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE) //po DELETE grazins likusi sarasa
+    @ResponseBody
+    public List<Product>deleteProductById(@PathVariable Long id) {
+        productService.deleteProductById(id);
+        return productService.getAllProducts();
+    }
 }

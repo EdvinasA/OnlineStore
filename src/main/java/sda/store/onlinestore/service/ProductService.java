@@ -1,9 +1,10 @@
 package sda.store.onlinestore.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import sda.store.onlinestore.exceptions.NotFoundException;
 import sda.store.onlinestore.model.Product;
 import sda.store.onlinestore.model.ProductDTO;
 import sda.store.onlinestore.repository.ProductRepository;
@@ -36,10 +37,17 @@ public class ProductService {
     }
 
     public Product getProductById(Long id) {
-        return productRepository.findProductById(id);
+        return productRepository.findProductById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("Product id = %d not found", id)));
     }
 
-    public Product getProductByTitle(String title) {
-        return productRepository.findProductByTitle(title);
+    public List<Product> getProductsByTitle(String title) {
+                 return productRepository.findProductsByTitle(title);
+                // .orElseThrow(() -> new NotFoundException(String.format("Product title = %d not found", title)));
+    }
+
+    public List<Product>  deleteProductById(Long id) {
+        productRepository.deleteProductById(id);
+        return productRepository.findAll();
     }
 }
