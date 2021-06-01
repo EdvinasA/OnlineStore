@@ -14,7 +14,6 @@ public class Cart {
     private Long id;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name="product_id", nullable=false)
     private Product product;
 
