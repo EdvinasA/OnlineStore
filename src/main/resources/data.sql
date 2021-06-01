@@ -14,4 +14,5 @@ insert into product_quantity (ID, PRODUCT_ID, QUANTITY, DATE)
 values (1, 1, 20.00, '2021-05-31');
 
 insert into cart (ID, PRODUCT_ID, QUANTITY)
-values (1, 1, 3);
+values (1, 1, 3),
+       (2, 2, 5);

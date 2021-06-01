@@ -1,5 +1,6 @@
 package sda.store.onlinestore.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import sda.store.onlinestore.enums.ProductType;
 
@@ -24,11 +25,14 @@ public class Product {
     private ProductType productType;
 
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     private List<Cart> carts;
 
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     private List<PurchaseOrderLine> purchaseOrderLines;
 
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     private List<ProductQuantity> productQuantities;
 }
