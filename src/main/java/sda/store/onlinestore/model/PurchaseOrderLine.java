@@ -15,7 +15,6 @@ public class PurchaseOrderLine {
     private Long id;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "purchase_order_id", nullable = false)
     private PurchaseOrder purchaseOrder;
 
