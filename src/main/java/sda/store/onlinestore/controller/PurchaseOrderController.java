@@ -1,13 +1,12 @@
 package sda.store.onlinestore.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import sda.store.onlinestore.model.PurchaseOrder;
 import sda.store.onlinestore.model.PurchaseOrderDTO;
 import sda.store.onlinestore.service.PurchaseOrderService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/purchase/order")
@@ -18,6 +17,16 @@ public class PurchaseOrderController {
     @PostMapping
     public PurchaseOrder postPurchaseOrder(@RequestBody PurchaseOrderDTO purchaseOrderDTO){
         return purchaseOrderService.createPurchaseOrder(purchaseOrderDTO);
+    }
+
+    @GetMapping
+    public List<PurchaseOrder> getAllPurchaseOrder(){
+        return purchaseOrderService.getAllPurchaseOrder();
+    }
+
+    @GetMapping (value = "/{id}")
+    public PurchaseOrder getPurchaseOrderById(@PathVariable Long id){
+        return purchaseOrderService.getPurchaseOrderById(id);
     }
 
 }

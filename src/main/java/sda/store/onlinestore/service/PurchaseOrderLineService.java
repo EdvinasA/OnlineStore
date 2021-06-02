@@ -8,6 +8,7 @@ import sda.store.onlinestore.repository.ProductRepository;
 import sda.store.onlinestore.repository.PurchaseOrderLineRepository;
 import sda.store.onlinestore.repository.PurchaseOrderRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,5 +36,14 @@ public class PurchaseOrderLineService {
         purchaseOrderLine.setQuantity(purchaseOrderLineDTO.getQuantity());
         purchaseOrderLineRepository.save(purchaseOrderLine);
         return purchaseOrderLine;
+    }
+
+    public List<PurchaseOrderLine> getAllPurchaseOrderLine() {
+        return purchaseOrderLineRepository.findAll();
+    }
+
+    public PurchaseOrderLine getAllPurchaseOrderLineById(Long purchase_order_line_id) {
+        Optional<PurchaseOrderLine> purchaseOrderLineOpt = purchaseOrderLineRepository.findById(purchase_order_line_id);
+        return purchaseOrderLineOpt.orElseThrow(() -> new RuntimeException("Purchase order line was not found"));
     }
 }
