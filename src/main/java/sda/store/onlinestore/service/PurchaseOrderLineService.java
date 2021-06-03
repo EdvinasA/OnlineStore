@@ -42,8 +42,12 @@ public class PurchaseOrderLineService {
         return purchaseOrderLineRepository.findAll();
     }
 
-    public PurchaseOrderLine getAllPurchaseOrderLineById(Long purchase_order_line_id) {
+    public PurchaseOrderLine getPurchaseOrderLineById(Long purchase_order_line_id) {
         Optional<PurchaseOrderLine> purchaseOrderLineOpt = purchaseOrderLineRepository.findById(purchase_order_line_id);
         return purchaseOrderLineOpt.orElseThrow(() -> new RuntimeException("Purchase order line was not found"));
+    }
+
+    public List<PurchaseOrderLine> getPurchaseOrderLineByOrderId(Long id) {
+        return purchaseOrderLineRepository.findPurchaseOrderLineByPurchaseOrderId(id);
     }
 }
