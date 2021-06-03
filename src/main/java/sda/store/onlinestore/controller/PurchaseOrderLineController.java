@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/purchase/order/line")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class PurchaseOrderLineController {
     @Autowired
     private PurchaseOrderLineService purchaseOrderLineService;
