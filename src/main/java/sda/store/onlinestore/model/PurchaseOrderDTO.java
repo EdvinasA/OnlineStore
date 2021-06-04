@@ -1,8 +1,6 @@
 package sda.store.onlinestore.model;
 
 import lombok.Data;
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.Max;
 import java.time.LocalDate;
 
 @Data
