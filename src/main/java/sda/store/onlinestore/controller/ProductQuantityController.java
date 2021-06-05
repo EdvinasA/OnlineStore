@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "**")
 @RequestMapping(value = "/product/quantity")
 public class ProductQuantityController {
     @Autowired
@@ -29,8 +29,8 @@ public class ProductQuantityController {
     }
 
     @GetMapping(value = "/{id}")
-    public ProductQuantity getProductQuantityById(@RequestParam Long productQuantityId){
-        return productQuantityService.getProductQuantityById(productQuantityId);
+    public ProductQuantity getProductQuantityById(@PathVariable Long id){
+        return productQuantityService.getProductQuantityById(id);
     }
 
     @GetMapping(value = "/onDate")
