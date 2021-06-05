@@ -9,7 +9,6 @@ import sda.store.onlinestore.model.ProductDTO;
 import sda.store.onlinestore.model.Product;
 import sda.store.onlinestore.service.ProductService;
 
-
 import java.util.List;
 
 @RequestMapping(value = "/product")
