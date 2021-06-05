@@ -13,6 +13,7 @@ import sda.store.onlinestore.repository.ProductRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -45,12 +46,12 @@ public class ProductService {
     }
 
     public List<Product> getProductsByTitle(String title) {
-        return productRepository.findProductsByTitle(title);
+        return productRepository.findProductsByTitleIgnoreCase(title);
         // .orElseThrow(() -> new NotFoundException(String.format("Product title = %d not found", title)));
     }
 
     public void deleteProductById(Long id) {
-        productRepository.deleteProductById(id);
+        productRepository.deleteById(id);
     }
 
     public Product updateProductById(Long id, ProductDTO productDTO) {

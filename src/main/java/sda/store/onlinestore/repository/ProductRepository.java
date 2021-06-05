@@ -13,10 +13,12 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
      Optional<Product> findProductById(Long id);
 
-    List<Product> findProductsByTitle(String title);
+    List<Product> findProductsByTitleIgnoreCase(String title);
 
     @Transactional
     void deleteProductById(Long id);
+
+    void deleteById(Long id);
 
 
 }
