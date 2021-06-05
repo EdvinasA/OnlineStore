@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: development
   h2:
     console:
       enabled: true
@@ -14,3 +16,4 @@ spring:
       ddl-auto: create-drop
 server:
   port: 8080
+
