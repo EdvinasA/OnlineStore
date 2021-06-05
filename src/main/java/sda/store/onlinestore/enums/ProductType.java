@@ -4,4 +4,5 @@ public enum ProductType {
     COMPUTER,
     MONITOR,
     OTHERS
+
 }

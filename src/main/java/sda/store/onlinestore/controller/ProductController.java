@@ -25,6 +25,7 @@ public class ProductController {
 
     @PostMapping
     public Product newProductRegistration(@RequestBody ProductDTO productDTO) {
+        System.out.println(productDTO.toString());
         return productService.newProductRegistration(productDTO);
     }
 
