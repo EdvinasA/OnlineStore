@@ -2,6 +2,7 @@ package sda.store.onlinestore.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sda.store.onlinestore.model.ProductDTO;
@@ -49,9 +50,17 @@ public class ProductController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(path = "/{id}")
+  /*  @PutMapping(path = "/{id}")
     public ResponseEntity<ProductDTO> updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
         productService.updateProductById(id, productDTO);
         return ResponseEntity.ok(productDTO);
+    } */
+
+   @PutMapping("/{id}")
+    ResponseEntity<Product> updateProductById(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
+        if (productService.getProductById(id) != null)
+            return new ResponseEntity(productService.updateProductById(id, productDTO), HttpStatus.OK);
+        else
+           return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 }
