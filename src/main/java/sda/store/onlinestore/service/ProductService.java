@@ -73,7 +73,9 @@ public class ProductService {
         for (Product product: products) {
             ProductQuantityResponse productQuantityResponse = new ProductQuantityResponse();
             productQuantityResponse.setProduct(product);
-            productQuantityResponse.setQuantity(productQuantityRepository.findProductQuantityById(date, product.getId()));
+
+            Double productQuantity = productQuantityRepository.findProductQuantityById(date, product.getId());
+            productQuantityResponse.setQuantity(productQuantity == null ?0 : productQuantity);
             productQuantityResponse.setOnDate(date);
             productQuantityResponses.add(productQuantityResponse);
         }
