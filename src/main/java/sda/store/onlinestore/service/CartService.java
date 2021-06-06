@@ -8,6 +8,7 @@ import sda.store.onlinestore.model.Product;
 import sda.store.onlinestore.repository.CartRepository;
 import sda.store.onlinestore.repository.ProductRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,5 +37,17 @@ public class CartService {
     public Cart getCartEntryById(Long cartId) {
         Optional<Cart> cartOpt = cartRepository.findById(cartId);
         return cartOpt.orElseThrow(() -> new RuntimeException("Cart entry was nor found"));
+    }
+
+    public Double getTotalPrice() {
+        double sum = 0;
+        List<Cart> allProducts = new ArrayList<>();
+        allProducts = getAllCart();
+        for (Cart cart:
+             allProducts) {
+           double productSum = cart.getProduct().getPrice() * cart.getQuantity();
+           sum += productSum;
+        }
+        return sum;
     }
 }

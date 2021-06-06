@@ -29,4 +29,9 @@ public class CartController {
     public Cart getCartEntryById(@PathVariable Long cartId){
         return cartService.getCartEntryById(cartId);
     }
+
+    @GetMapping(value = "/getTotalPrice")
+    public Double getTotalPrice() {
+        return cartService.getTotalPrice();
+    }
 }
