@@ -4,8 +4,12 @@ import lombok.Data;
 import sda.store.onlinestore.enums.ProductType;
 
 import javax.persistence.OneToMany;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 import java.util.List;
 
+//@Valid
 @Data
 public class ProductDTO {
 

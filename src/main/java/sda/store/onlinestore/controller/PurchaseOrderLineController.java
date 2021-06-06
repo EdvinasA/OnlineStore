@@ -20,18 +20,23 @@ public class PurchaseOrderLineController {
         return purchaseOrderLineService.addProductToPurchaseOrderLine(purchaseOrderLineDTO);
     }
 
+    @PostMapping(value = "/lines/moveFromCart")
+    public List<PurchaseOrderLine> createOrderLinesFromCart(@RequestParam Long purchase_order_id){
+        return purchaseOrderLineService.createOrderLinesFromCart(purchase_order_id);
+    }
+
     @GetMapping(value = "/lines")
     public List<PurchaseOrderLine> getAllPurchaseOrderLine(){
         return purchaseOrderLineService.getAllPurchaseOrderLine();
     }
 
     @GetMapping(value = "/line/{id}")
-    public PurchaseOrderLine getPurchaseOrderLineById(@PathVariable Long id) {
+    public PurchaseOrderLine getPurchaseOrderLineById(@PathVariable (required = false) Long id) {
         return purchaseOrderLineService.getPurchaseOrderLineById(id);
     }
 
     @GetMapping(value = "{id}/lines")
-    public List<PurchaseOrderLine> getPurchaseOrderLineByOrderId(@PathVariable Long id){
+    public List<PurchaseOrderLine> getPurchaseOrderLineByOrderId(@PathVariable (required = false) Long id){
         return purchaseOrderLineService.getPurchaseOrderLineByOrderId(id);
     }
 }
