@@ -33,17 +33,17 @@ public class ProductQuantityController {
         return productQuantityService.getProductQuantityById(productQuantityId);
     }
 
-    @GetMapping(value = "/onDate")
+/*    @GetMapping(value = "/onDate")
     public List<ProductQuantityResponse> getAllProductQuantityOnDate(@RequestParam("date")
                                                                   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date){
         return productQuantityService.getAllProductQuantityOnDate(date);
-    }
+    }*/
 
-    @GetMapping(value = "/onDate/id")
+/*    @GetMapping(value = "/onDate/id")
     public Double getQuantityByProductIdOnDate(@RequestParam("date")
                                              @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
                                          @RequestParam("productId") Long productId){
-        return productQuantityService.etQuantityByProductIdOnDate(date, productId);
-    }
+        return productQuantityService.getQuantityByProductIdOnDate(date, productId);
+    }*/
 
 }
