@@ -12,7 +12,8 @@ public class ProductQuantityResponse {
     private String title;
     private String description;
     private Double price;
-    private ProductType productType;
+    private String type;
+    //ProductType productType;
     private Double quantity;
     private LocalDate onDate;
 }

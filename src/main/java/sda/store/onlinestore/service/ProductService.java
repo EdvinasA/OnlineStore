@@ -22,16 +22,12 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    /*@Autowired
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;} */
-
     public Product newProductRegistration(ProductDTO productDTO) {
         Product product = new Product();
         product.setTitle(productDTO.getTitle());
         product.setDescription(productDTO.getDescription());
         product.setPrice(productDTO.getPrice());
-        product.setProductType(productDTO.getProductType());
+        product.setType(productDTO.getType());
         product.setProductQuantities(productDTO.getProductQuantities());
         productRepository.save(product);
         return product;
@@ -48,7 +44,6 @@ public class ProductService {
 
     public List<Product> getProductsByTitle(String title) {
         return productRepository.findProductsByTitleIgnoreCase(title);
-        // .orElseThrow(() -> new NotFoundException(String.format("Product title = %d not found", title)));
     }
 
     public void deleteProductById(Long id) {
@@ -60,7 +55,7 @@ public class ProductService {
         productToUpdate.setTitle(productDTO.getTitle());
         productToUpdate.setDescription(productDTO.getDescription());
         productToUpdate.setPrice(productDTO.getPrice());
-        productToUpdate.setProductType(productDTO.getProductType());
+        productToUpdate.setType(productDTO.getType());
         productToUpdate.setProductQuantities(productDTO.getProductQuantities());
         productRepository.save(productToUpdate);
         return productToUpdate;

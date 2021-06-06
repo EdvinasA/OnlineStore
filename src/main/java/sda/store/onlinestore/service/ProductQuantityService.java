@@ -1,5 +1,7 @@
 package sda.store.onlinestore.service;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sda.store.onlinestore.enums.ProductType;
@@ -43,9 +45,6 @@ public class ProductQuantityService {
         return productQuantityOpt.orElseThrow(() -> new RuntimeException("Product quantity was not found"));
     }
 
-
-
-
     /*public List<ProductQuantityResponse> getAllProductQuantityOnDate(LocalDate date) {
         List<ProductQuantityResponse> productQuantityResponses = new ArrayList<>();
         List<Object[]> productAndQuantityObj = productQuantityRepository.findAllProductQuantities(date);
@@ -76,7 +75,7 @@ public class ProductQuantityService {
             productQuantityResponse.setTitle(product.getTitle());
             productQuantityResponse.setDescription(product.getDescription());
             productQuantityResponse.setPrice(product.getPrice());
-            productQuantityResponse.setProductType(product.getProductType());
+            productQuantityResponse.setType(product.getType());
             productQuantityResponse.setQuantity((Double) o[1]);
             productQuantityResponse.setOnDate(date);
             productQuantityResponses.add(productQuantityResponse);
