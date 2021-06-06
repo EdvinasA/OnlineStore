@@ -1,5 +1,6 @@
 package sda.store.onlinestore.service;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -16,14 +17,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class ProductService {
 
     private final ProductRepository productRepository;
 
-    @Autowired
+    /*@Autowired
     public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+        this.productRepository = productRepository;} */
 
     public Product newProductRegistration(ProductDTO productDTO) {
         Product product = new Product();
@@ -55,7 +56,7 @@ public class ProductService {
     }
 
     public Product updateProductById(Long id, ProductDTO productDTO) {
-        Product productToUpdate = productRepository.getOne(id);
+        Product productToUpdate = productRepository.getById(id);
         productToUpdate.setTitle(productDTO.getTitle());
         productToUpdate.setDescription(productDTO.getDescription());
         productToUpdate.setPrice(productDTO.getPrice());
