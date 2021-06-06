@@ -18,9 +18,13 @@ public class PurchaseOrderLine {
     private PurchaseOrder purchaseOrder;
 
     @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false            )
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
     //@Min(value = 0, message = "Quantity cannot be < 0")
     private Double quantity;
+
+
+
+
 }

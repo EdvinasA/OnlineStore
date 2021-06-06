@@ -56,7 +56,7 @@ public class ProductController {
             return new ResponseEntity<>(productService.getProductsByTitle(title), HttpStatus.OK);
      }
 
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "/delete/{id}")
     public ResponseEntity<Void> deleteProductById(@PathVariable Long id) {
         if (productService.getProductById(id) == null) {
             throw new NotFoundException("Product not found, productId: " + id);
