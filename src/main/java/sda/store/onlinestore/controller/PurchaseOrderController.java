@@ -26,7 +26,7 @@ public class PurchaseOrderController {
     }
 
     @GetMapping (value = "/{id}")
-    public PurchaseOrder getPurchaseOrderById(@PathVariable Long id){
+    public PurchaseOrder getPurchaseOrderById(@PathVariable (required = false) Long id){
         return purchaseOrderService.getPurchaseOrderById(id);
     }
 }
