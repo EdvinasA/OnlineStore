@@ -2,6 +2,7 @@ package sda.store.onlinestore.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.ToString;
 import sda.store.onlinestore.enums.ProductType;
 
 
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
+@ToString
 @Entity
 @Data
 //@Valid
@@ -31,7 +33,7 @@ public class Product {
   //  @Positive
     private Double price;
 
-    private ProductType productType;
+    private String type;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
