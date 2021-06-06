@@ -1,28 +1,27 @@
 package sda.store.onlinestore.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sda.store.onlinestore.exceptions.NotFoundException;
 import sda.store.onlinestore.model.ProductDTO;
 import sda.store.onlinestore.model.Product;
+import sda.store.onlinestore.model.responseBody.ProductQuantityResponse;
 import sda.store.onlinestore.service.ProductService;
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 
 
 @RequestMapping(value = "/product")
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 @RestController
+@AllArgsConstructor
 public class ProductController {
-
     private final ProductService productService;
-
-    @Autowired
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -39,6 +38,12 @@ public class ProductController {
     public Product getProductById(@PathVariable("id") Long id) {
         return productService.getProductById(id);
     } */
+
+    @GetMapping(value = "/get-all/quantity")
+    public List<ProductQuantityResponse> getAllProductQuantityOnDate(@RequestParam("date")
+                                                         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date){
+        return productService.getAllProductQuantityOnDate(date);
+    }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable Long id) {
