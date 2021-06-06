@@ -6,20 +6,29 @@ import sda.store.onlinestore.enums.ProductType;
 
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.util.List;
 
 @Entity
 @Data
+//@Valid
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //@NotNull
     private String title;
 
+    //@NotNull
     private String description;
 
+    //@NotNull
+  //  @Positive
     private Double price;
 
     private ProductType productType;
@@ -32,7 +41,7 @@ public class Product {
     @JsonIgnore
     private List<PurchaseOrderLine> purchaseOrderLines;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "product")
     @JsonIgnore
     private List<ProductQuantity> productQuantities;
 }
