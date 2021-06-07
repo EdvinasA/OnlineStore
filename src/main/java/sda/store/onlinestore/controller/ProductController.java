@@ -56,6 +56,14 @@ public class ProductController {
         }
     }
 
+    @GetMapping(value = "/{id}/quantity")
+    public double getQuantityByProductIdOnDate(@RequestParam("date")
+                                                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+                                                                Long productId){
+        return productService.getQuantityByProductIdOnDate(date, productId);
+    }
+
+
     @GetMapping(value = "/title")
     public ResponseEntity<List<Product>> getProductsByTitle(String title) {
             return new ResponseEntity<>(productService.getProductsByTitle(title), HttpStatus.OK);

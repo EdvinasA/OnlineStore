@@ -81,4 +81,8 @@ public class ProductService {
         }
         return productQuantityResponses;
     }
+
+    public Double getQuantityByProductIdOnDate(LocalDate date, Long productId) {
+        return productQuantityRepository.findProductQuantityById(date, productId);
+    }
 }
