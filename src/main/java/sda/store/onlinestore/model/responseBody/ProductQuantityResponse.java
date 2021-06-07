@@ -9,10 +9,6 @@ import java.time.LocalDate;
 @Data
 public class ProductQuantityResponse {
     private Product product;
-    private String title;
-    private String description;
-    private Double price;
-    private ProductType productType;
     private Double quantity;
     private LocalDate onDate;
 }
