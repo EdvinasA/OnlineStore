@@ -1,5 +1,5 @@
 
-insert into PRODUCT (ID, TITLE, DESCRIPTION, PRICE, product_Type)
+insert into PRODUCT (ID, TITLE, DESCRIPTION, PRICE, TYPE)
 VALUES (1, 'Dell XP 15266', 'Computer', 966.66, 1),
        (2, 'Razor XP 55565', 'Computer', 565.66, 1),
        (3, 'Slipers', 'cosy and warm', 20.00, 2),
