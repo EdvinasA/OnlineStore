@@ -1,7 +1,9 @@
 package sda.store.onlinestore.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import sda.store.onlinestore.exceptions.NotFoundException;
 import sda.store.onlinestore.model.Cart;
 import sda.store.onlinestore.model.CartDTO;
 import sda.store.onlinestore.service.CartService;
@@ -33,5 +35,15 @@ public class CartController {
     @GetMapping(value = "/getTotalPrice")
     public Double getTotalPrice() {
         return cartService.getTotalPrice();
+    }
+
+    @DeleteMapping(path = "/delete/{id}")
+    public ResponseEntity<Void> deleteCartProductById(@PathVariable Long id) {
+        if (cartService.getCartEntryById(id) == null) {
+            throw new NotFoundException("Cart not found, CartId: " + id);
+        } else {
+            cartService.deleteCartProductById(id);
+            return ResponseEntity.ok().build();
+        }
     }
 }

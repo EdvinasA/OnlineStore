@@ -24,10 +24,31 @@ public class CartService {
         Cart cart = new Cart();
         Optional<Product> productOpt = productRepository.findById(cartDTO.getProductId());
         Product product = productOpt.orElseThrow(() -> new RuntimeException("Product was not found"));
-        cart.setProduct(product);
-        cart.setQuantity(cartDTO.getQuantity());
-        cartRepository.save(cart);
-        return cart;
+                if (checkIfProductExists(cartDTO)) {
+                    return null;
+                }
+                else {
+            cart.setProduct(product);
+            cart.setQuantity(cartDTO.getQuantity());
+            cartRepository.save(cart);
+            return cart;
+        }
+    }
+
+    public boolean checkIfProductExists(CartDTO cartDTO) {
+        List<Cart> allProductsInCart = getAllCart();
+        for (Cart cart: allProductsInCart) {
+            if (cart.getProduct().getId().equals(cartDTO.getProductId())) {
+                cart.setQuantity(cart.getQuantity() + 1);
+                cartRepository.save(cart);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void deleteCartProductById(Long id) {
+        cartRepository.deleteById(id);
     }
 
     public List<Cart> getAllCart() {
