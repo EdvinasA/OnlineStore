@@ -55,6 +55,18 @@ public class CartService {
         return cartRepository.findAll();
     }
 
+    public void addProductQuantityInCart(Long cartId) {
+        Cart cart = getCartEntryById(cartId);
+        cart.setQuantity(cart.getQuantity() + 1);
+        cartRepository.save(cart);
+    }
+
+    public void subtractProductQuantityInCart(Long cartId) {
+        Cart cart = getCartEntryById(cartId);
+        cart.setQuantity(cart.getQuantity() - 1);
+        cartRepository.save(cart);
+    }
+
     public Cart getCartEntryById(Long cartId) {
         Optional<Cart> cartOpt = cartRepository.findById(cartId);
         return cartOpt.orElseThrow(() -> new RuntimeException("Cart entry was nor found"));
