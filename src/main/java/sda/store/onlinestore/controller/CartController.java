@@ -40,9 +40,9 @@ public class CartController {
     @DeleteMapping(path = "/delete/{id}")
     public ResponseEntity<Void> deleteCartProductById(@PathVariable Long id) {
         if (cartService.getCartEntryById(id) == null) {
-            throw new NotFoundException("Product not found, productId: " + id);
+            throw new NotFoundException("Cart not found, CartId: " + id);
         } else {
-            cartService.getCartEntryById(id);
+            cartService.deleteCartProductById(id);
             return ResponseEntity.ok().build();
         }
     }

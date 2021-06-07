@@ -24,21 +24,32 @@ public class CartService {
         Cart cart = new Cart();
         Optional<Product> productOpt = productRepository.findById(cartDTO.getProductId());
         Product product = productOpt.orElseThrow(() -> new RuntimeException("Product was not found"));
-//        List<Cart> allProductsInCart = getAllCart();
-//        for (Cart cart1:
-//             allProductsInCart) {
-//            if (cart1.getProduct().getId().equals(cartDTO.getProductId()) || !allProductsInCart.isEmpty()) {
-//                Cart existingCart = getCartEntryById(cartDTO.getProductId());
-//                existingCart.setQuantity(existingCart.getQuantity() + 1);
-//                cartRepository.save(existingCart);
-//            }else {
-                cart.setProduct(product);
-                cart.setQuantity(cartDTO.getQuantity());
+                if (checkIfProductExists(cartDTO)) {
+                    return null;
+                }
+                else {
+            cart.setProduct(product);
+            cart.setQuantity(cartDTO.getQuantity());
+            cartRepository.save(cart);
+            return cart;
+        }
+    }
+
+    public boolean checkIfProductExists(CartDTO cartDTO) {
+        List<Cart> allProductsInCart = getAllCart();
+        for (Cart cart: allProductsInCart) {
+            if (cart.getProduct().getId().equals(cartDTO.getProductId())) {
+                cart.setQuantity(cart.getQuantity() + 1);
                 cartRepository.save(cart);
-                return cart;
+                return true;
             }
-//        }
-//        return null;
+        }
+        return false;
+    }
+
+    public void deleteCartProductById(Long id) {
+        cartRepository.deleteById(id);
+    }
 
     public List<Cart> getAllCart() {
         return cartRepository.findAll();
