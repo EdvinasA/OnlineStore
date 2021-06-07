@@ -10,7 +10,6 @@ import sda.store.onlinestore.repository.ProductRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -25,23 +24,21 @@ public class CartService {
         Cart cart = new Cart();
         Optional<Product> productOpt = productRepository.findById(cartDTO.getProductId());
         Product product = productOpt.orElseThrow(() -> new RuntimeException("Product was not found"));
-        List<Cart> allProductsInCart = getAllCart();
-        for (Cart cart1:
-             allProductsInCart) {
-            if (cart1.getProduct().getId().equals(cartDTO.getProductId())) {
-                Cart existingCart = getCartEntryById(cartDTO.getProductId());
-                existingCart.setQuantity(existingCart.getQuantity() + 1);
-                cartRepository.save(existingCart);
-                return null;
-            }else {
+//        List<Cart> allProductsInCart = getAllCart();
+//        for (Cart cart1:
+//             allProductsInCart) {
+//            if (cart1.getProduct().getId().equals(cartDTO.getProductId()) || !allProductsInCart.isEmpty()) {
+//                Cart existingCart = getCartEntryById(cartDTO.getProductId());
+//                existingCart.setQuantity(existingCart.getQuantity() + 1);
+//                cartRepository.save(existingCart);
+//            }else {
                 cart.setProduct(product);
                 cart.setQuantity(cartDTO.getQuantity());
                 cartRepository.save(cart);
                 return cart;
             }
-        }
-        return null;
-    }
+//        }
+//        return null;
 
     public List<Cart> getAllCart() {
         return cartRepository.findAll();
