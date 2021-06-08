@@ -22,6 +22,16 @@ public class CartController {
         return cartService.addProductToCart(cartDTO);
     }
 
+    @PostMapping(value = "/add-quantity")
+    public void addQuantityToCartProduct(@RequestBody Cart cart) {
+        cartService.addProductQuantityInCart(cart.getId());
+    }
+
+    @PostMapping(value = "/subtract-quantity")
+    public void subtractProductQuantityInCart(@RequestBody Cart cart) {
+        cartService.subtractProductQuantityInCart(cart.getId());
+    }
+
     @GetMapping
     public List<Cart> getAllCart(){
         return cartService.getAllCart();
