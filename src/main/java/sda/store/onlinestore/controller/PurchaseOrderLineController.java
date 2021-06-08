@@ -22,7 +22,8 @@ public class PurchaseOrderLineController {
 
     @PostMapping(value = "/lines/moveFromCart")
     public List<PurchaseOrderLine> createOrderLinesFromCart(@RequestParam Long purchase_order_id){
-        return purchaseOrderLineService.createOrderLinesFromCart(purchase_order_id);
+        purchaseOrderLineService.performOrderLineCreationActions(purchase_order_id);
+        return purchaseOrderLineService.getAllPurchaseOrderLineByOrderId(purchase_order_id);
     }
 
     @GetMapping(value = "/lines")
@@ -37,6 +38,6 @@ public class PurchaseOrderLineController {
 
     @GetMapping(value = "{id}/lines")
     public List<PurchaseOrderLine> getPurchaseOrderLineByOrderId(@PathVariable (required = false) Long id){
-        return purchaseOrderLineService.getPurchaseOrderLineByOrderId(id);
+        return purchaseOrderLineService.getAllPurchaseOrderLineByOrderId(id);
     }
 }
