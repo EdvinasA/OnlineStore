@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sda.store.onlinestore.model.*;
+import sda.store.onlinestore.model.responseBody.PurchaseOrderTotalCostResponse;
 import sda.store.onlinestore.repository.*;
 
 import java.time.LocalDate;
@@ -94,6 +95,27 @@ public class PurchaseOrderLineService {
 
     public List<PurchaseOrderLine> getAllPurchaseOrderLineByOrderId(Long id) {
         return purchaseOrderLineRepository.findPurchaseOrderLineByPurchaseOrderId(id);
+    }
+
+    public List<PurchaseOrderTotalCostResponse> getAllPurchaseOrdersCost() {
+        List<PurchaseOrderTotalCostResponse> purchaseOrderTotalCostResponses = new ArrayList<>();
+        List<PurchaseOrder> purchaseOrders = purchaseOrderRepository.findAll();
+        for (PurchaseOrder purchaseOrder: purchaseOrders) {
+            PurchaseOrderTotalCostResponse purchaseOrderTotalCostResponse = new PurchaseOrderTotalCostResponse();
+            purchaseOrderTotalCostResponse.setPurchaseOrder(purchaseOrder);
+            purchaseOrderTotalCostResponse.setTotalCost(getPurchaseOrderCostByOrderId(purchaseOrder.getId()));
+            purchaseOrderTotalCostResponses.add(purchaseOrderTotalCostResponse);
+        }
+        return purchaseOrderTotalCostResponses;
+    }
+
+    public double getPurchaseOrderCostByOrderId(Long purchase_order_id){
+        double totalCost = 0;
+        List<PurchaseOrderLine> purchaseOrderLines = purchaseOrderLineRepository.findPurchaseOrderLineByPurchaseOrderId(purchase_order_id);
+        for (PurchaseOrderLine purchaseOrderLine: purchaseOrderLines) {
+            totalCost += purchaseOrderLine.getQuantity() * purchaseOrderLine.getProduct().getPrice();
+        }
+        return totalCost;
     }
 
 }

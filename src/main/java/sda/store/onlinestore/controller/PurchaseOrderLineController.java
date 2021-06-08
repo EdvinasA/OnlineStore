@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sda.store.onlinestore.model.PurchaseOrderLine;
 import sda.store.onlinestore.model.PurchaseOrderLineDTO;
+import sda.store.onlinestore.model.responseBody.PurchaseOrderTotalCostResponse;
 import sda.store.onlinestore.service.PurchaseOrderLineService;
 
 import java.util.List;
@@ -39,5 +40,15 @@ public class PurchaseOrderLineController {
     @GetMapping(value = "{id}/lines")
     public List<PurchaseOrderLine> getPurchaseOrderLineByOrderId(@PathVariable (required = false) Long id){
         return purchaseOrderLineService.getAllPurchaseOrderLineByOrderId(id);
+    }
+
+    @GetMapping(value = "/totals")
+    public List<PurchaseOrderTotalCostResponse> getAllPurchaseOrdersCost(){
+        return purchaseOrderLineService.getAllPurchaseOrdersCost();
+    }
+
+    @GetMapping(value = "{id}/total")
+    public double getPurchaseOrderCostByOrderId(@PathVariable (required = false) Long id){
+        return purchaseOrderLineService.getPurchaseOrderCostByOrderId(id);
     }
 }
