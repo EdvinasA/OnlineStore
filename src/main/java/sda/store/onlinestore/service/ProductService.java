@@ -16,8 +16,13 @@ import sda.store.onlinestore.repository.ProductQuantityRepository;
 import sda.store.onlinestore.repository.ProductRepository;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +36,7 @@ public class ProductService {
     public Product newProductRegistration(ProductDTO productDTO) {
         Product product = new Product();
         product.setTitle(productDTO.getTitle());
+        product.setImageUrl(productDTO.getImageUrl());
         product.setDescription(productDTO.getDescription());
         product.setPrice(productDTO.getPrice());
         product.setType(productDTO.getType());
@@ -59,6 +65,7 @@ public class ProductService {
     public Product updateProductById(Long id, ProductDTO productDTO) {
         Product productToUpdate = productRepository.getById(id);
         productToUpdate.setTitle(productDTO.getTitle());
+        productToUpdate.setImageUrl(productDTO.getImageUrl());
         productToUpdate.setDescription(productDTO.getDescription());
         productToUpdate.setPrice(productDTO.getPrice());
         productToUpdate.setType(productDTO.getType());
@@ -85,4 +92,5 @@ public class ProductService {
     public Double getQuantityByProductIdOnDate(LocalDate date, Long productId) {
         return productQuantityRepository.findProductQuantityById(date, productId);
     }
+
 }
