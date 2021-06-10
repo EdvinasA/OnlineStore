@@ -63,8 +63,16 @@ public class CartService {
 
     public void subtractProductQuantityInCart(Long cartId) {
         Cart cart = getCartEntryById(cartId);
+        if (checkIfCartIsZero(cart)) {
+            cart.setQuantity(0.00);
+            return;
+        }
         cart.setQuantity(cart.getQuantity() - 1);
         cartRepository.save(cart);
+    }
+
+    public boolean checkIfCartIsZero(Cart cart) {
+        return cart.getQuantity() <= 0;
     }
 
     public Cart getCartEntryById(Long cartId) {
