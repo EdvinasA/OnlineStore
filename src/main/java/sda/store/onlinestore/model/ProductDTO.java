@@ -13,6 +13,8 @@ import java.util.List;
 @Data
 public class ProductDTO {
 
+    private String imageUrl;
+
     private String title;
 
     private String description;
