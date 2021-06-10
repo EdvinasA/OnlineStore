@@ -22,9 +22,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -36,7 +34,7 @@ public class ProductService {
     public Product newProductRegistration(ProductDTO productDTO) {
         Product product = new Product();
         product.setTitle(productDTO.getTitle());
-        product.setImageUrl(productDTO.getImageUrl());
+        product.setImageUrl("assets/images/" + productDTO.getImageUrl());
         product.setDescription(productDTO.getDescription());
         product.setPrice(productDTO.getPrice());
         product.setType(productDTO.getType());
