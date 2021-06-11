@@ -26,7 +26,7 @@ class ProductServiceTest extends OnlineStoreApplicationTests {
 
     @Mock
     public ProductRepository productRepository;
-//    public ProductQuantityRepository productQuantityRepository;
+    public ProductQuantityRepository productQuantityRepository;
 
 
     @Test
@@ -56,6 +56,15 @@ class ProductServiceTest extends OnlineStoreApplicationTests {
         List<Product> product1 = productService.getAllProducts();
 
         assertThat(product1).isEqualTo(expectedProduct);
+    }
+
+    @Test
+    void getProductById_ReturnsNewProduct_BecauseProductDontExist() {
+
+//        Mockito.when(this.productRepository.findProductById(1L)).thenReturn(java.util.Optional.of(new Product()));
+//        Product product1 = productService.getProductById(1L);
+//
+//        assertThat(product1).;
     }
 
     @Test

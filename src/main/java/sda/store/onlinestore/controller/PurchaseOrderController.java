@@ -6,6 +6,7 @@ import sda.store.onlinestore.model.PurchaseOrder;
 import sda.store.onlinestore.model.PurchaseOrderDTO;
 import sda.store.onlinestore.service.PurchaseOrderService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -17,7 +18,7 @@ public class PurchaseOrderController {
     private PurchaseOrderService purchaseOrderService;
 
     @PostMapping
-    public PurchaseOrder postPurchaseOrder(@RequestBody PurchaseOrderDTO purchaseOrderDTO){
+    public PurchaseOrder postPurchaseOrder(@Valid @RequestBody PurchaseOrderDTO purchaseOrderDTO){
         return purchaseOrderService.createPurchaseOrder(purchaseOrderDTO);
     }
     @GetMapping

@@ -1,7 +1,6 @@
 package sda.store.onlinestore.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,11 +33,6 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-   /* @GetMapping(value = "/{id}")
-    public Product getProductById(@PathVariable("id") Long id) {
-        return productService.getProductById(id);
-    } */
-
     @GetMapping(value = "/get-all/quantity")
     public List<ProductQuantityResponse> getAllProductQuantityOnDate(@RequestParam("date")
                                                          @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date){
@@ -51,7 +45,6 @@ public class ProductController {
             return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);
         }
         else {
-           // return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             throw new NotFoundException("Product not found, productId: " + id);
         }
     }
