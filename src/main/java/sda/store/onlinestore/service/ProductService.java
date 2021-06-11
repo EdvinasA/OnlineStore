@@ -1,35 +1,29 @@
 package sda.store.onlinestore.service;
 
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 
-import org.springframework.util.Assert;
 import sda.store.onlinestore.exceptions.NotFoundException;
 import sda.store.onlinestore.model.Product;
 import sda.store.onlinestore.model.ProductDTO;
-import sda.store.onlinestore.model.ProductQuantity;
 import sda.store.onlinestore.model.responseBody.ProductQuantityResponse;
 import sda.store.onlinestore.repository.ProductQuantityRepository;
 import sda.store.onlinestore.repository.ProductRepository;
 
-import javax.transaction.Transactional;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class ProductService {
 
     private final ProductRepository productRepository;
     private final ProductQuantityRepository productQuantityRepository;
+
+    public ProductService(ProductRepository productRepository, ProductQuantityRepository productQuantityRepository) {
+        this.productRepository = productRepository;
+        this.productQuantityRepository = productQuantityRepository;
+    }
 
     public Product newProductRegistration(ProductDTO productDTO) {
         Product product = new Product();
