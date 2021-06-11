@@ -14,3 +14,4 @@ spring:
       ddl-auto: create-drop
 server:
   port: 8080
+
