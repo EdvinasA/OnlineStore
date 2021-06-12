@@ -26,8 +26,7 @@ public class ProductQuantityService {
         productQuantity.setProduct(product);
         productQuantity.setQuantity(productQuantityDTO.getQuantity());
         productQuantity.setDate(productQuantityDTO.getDate());
-        productQuantityRepository.save(productQuantity);
-        return productQuantity;
+        return productQuantityRepository.save(productQuantity);
     }
 
     public List<ProductQuantity> getAllProductQuantity() {

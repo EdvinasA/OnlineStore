@@ -62,8 +62,7 @@ public class ProductService {
         productToUpdate.setPrice(productDTO.getPrice());
         productToUpdate.setType(productDTO.getType());
         productToUpdate.setProductQuantities(productDTO.getProductQuantities());
-        productRepository.save(productToUpdate);
-        return productToUpdate;
+        return productRepository.save(productToUpdate);
     }
 
     public List<ProductQuantityResponse> getAllProductQuantityOnDate(LocalDate date) {
