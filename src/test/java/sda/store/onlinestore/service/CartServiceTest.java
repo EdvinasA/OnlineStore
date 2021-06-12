@@ -8,6 +8,7 @@ import org.mockito.Mock;
 
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import sda.store.onlinestore.OnlineStoreApplicationTests;
 import sda.store.onlinestore.model.Cart;
 import sda.store.onlinestore.model.CartDTO;
 import sda.store.onlinestore.model.Product;
@@ -23,10 +24,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
-
 //@RunWith(MockitoJUnitRunner.class)
 @ExtendWith(MockitoExtension.class)
-class CartServiceTest {
+class CartServiceTest extends OnlineStoreApplicationTests {
 
     @Mock
     private CartRepository cartRepository;
@@ -38,10 +38,10 @@ class CartServiceTest {
     private CartService cartService = new CartService(this.cartRepository, this.productRepository);
 
     @Before
-    public void setup(){
+/*    public void setup(){
         MockitoAnnotations.initMocks(this); //without this you will get NPE
         this.cartService = new CartService(this.cartRepository, this.productRepository);
-    }
+    }*/
 
     @Test
     void when_addProductToCart_it_should_return_cart() {

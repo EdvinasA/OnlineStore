@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
+import static org.mockito.Mockito.*;
 import org.springframework.test.context.junit4.SpringRunner;
 import sda.store.onlinestore.OnlineStoreApplicationTests;
 import sda.store.onlinestore.model.Product;
@@ -29,12 +29,16 @@ class ProductServiceTest extends OnlineStoreApplicationTests {
 
     @Test
     void whenRegisteredNewProduct_findCreatedProductById() {
+        Product product = new Product();
+        product.setId(1L);
+        product.setTitle("Computer");
+        product.setPrice(22.53);
+
         ProductDTO productDTO = new ProductDTO();
         productDTO.setTitle("Computer");
         productDTO.setPrice(22.53);
-        Product product = productService.newProductRegistration(productDTO);
 
-        Mockito.when(this.productRepository.findProductById(1L)).thenReturn(java.util.Optional.ofNullable(product));
+        when(this.productRepository.findProductById(anyLong())).thenReturn(java.util.Optional.of(product));
         Product product1 = productService.getProductById(1L);
 
         assertThat(product1).isEqualTo(product);
@@ -50,7 +54,7 @@ class ProductServiceTest extends OnlineStoreApplicationTests {
         expectedProduct.add(product);
         expectedProduct.add(product2);
 
-        Mockito.when(this.productRepository.findAll()).thenReturn(expectedProduct);
+        when(this.productRepository.findAll()).thenReturn(expectedProduct);
         List<Product> product1 = productService.getAllProducts();
 
         assertThat(product1).isEqualTo(expectedProduct);
@@ -65,7 +69,7 @@ class ProductServiceTest extends OnlineStoreApplicationTests {
         Product product = new Product();
         product.setId(1L);
 
-        Mockito.when(this.productRepository.findProductById(1L)).thenReturn(java.util.Optional.of(product));
+        when(this.productRepository.findProductById(1L)).thenReturn(java.util.Optional.of(product));
         Product product1 = productService.getProductById(1L);
 
         assertThat(product1).isEqualTo(product);
@@ -74,7 +78,7 @@ class ProductServiceTest extends OnlineStoreApplicationTests {
     @Test
     void return_empty_when_ProductList_Empty() {
         List<Product> expected = new ArrayList<>();
-        Mockito.when(this.productRepository.findAll()).thenReturn(expected);
+        when(this.productRepository.findAll()).thenReturn(expected);
         List<Product> product1 = productService.getAllProducts();
 
         assertThat(product1).isEqualTo(expected);
@@ -88,7 +92,7 @@ class ProductServiceTest extends OnlineStoreApplicationTests {
         List<Product> expectedProducts = new ArrayList<>();
         expectedProducts.add(product);
 
-        Mockito.when(this.productRepository.findProductsByTitleIgnoreCase("Computer")).thenReturn(expectedProducts);
+        when(this.productRepository.findProductsByTitleIgnoreCase("Computer")).thenReturn(expectedProducts);
         List<Product> product1 = productService.getProductsByTitle("Computer");
 
         assertThat(product1).isEqualTo(expectedProducts);
