@@ -62,8 +62,7 @@ public class ProductService {
         productToUpdate.setPrice(productDTO.getPrice());
         productToUpdate.setType(productDTO.getType());
         productToUpdate.setProductQuantities(productDTO.getProductQuantities());
-        productRepository.save(productToUpdate);
-        return productToUpdate;
+        return productRepository.save(productToUpdate);
     }
 
     public List<ProductQuantityResponse> getAllProductQuantityOnDate(LocalDate date) {
@@ -72,7 +71,6 @@ public class ProductService {
         for (Product product: products) {
             ProductQuantityResponse productQuantityResponse = new ProductQuantityResponse();
             productQuantityResponse.setProduct(product);
-
             Double productQuantity = productQuantityRepository.findProductQuantityById(date, product.getId());
             productQuantityResponse.setQuantity(productQuantity == null ?0 : productQuantity);
             productQuantityResponse.setOnDate(date);

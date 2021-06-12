@@ -7,6 +7,7 @@ import sda.store.onlinestore.model.PurchaseOrderLineDTO;
 import sda.store.onlinestore.model.responseBody.PurchaseOrderTotalCostResponse;
 import sda.store.onlinestore.service.PurchaseOrderLineService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,7 +18,7 @@ public class PurchaseOrderLineController {
     private PurchaseOrderLineService purchaseOrderLineService;
 
     @PostMapping(value = "/line")
-    public PurchaseOrderLine postPurchaseOrderLine(@RequestBody PurchaseOrderLineDTO purchaseOrderLineDTO){
+    public PurchaseOrderLine postPurchaseOrderLine(@Valid @RequestBody PurchaseOrderLineDTO purchaseOrderLineDTO){
         return purchaseOrderLineService.addProductToPurchaseOrderLine(purchaseOrderLineDTO);
     }
 

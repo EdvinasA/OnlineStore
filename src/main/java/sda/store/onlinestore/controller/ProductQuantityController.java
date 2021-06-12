@@ -8,6 +8,7 @@ import sda.store.onlinestore.model.ProductQuantityDTO;
 import sda.store.onlinestore.model.responseBody.ProductQuantityResponse;
 import sda.store.onlinestore.service.ProductQuantityService;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class ProductQuantityController {
     private ProductQuantityService productQuantityService;
 
     @PostMapping
-    public ProductQuantity postProductQuantity(@RequestBody ProductQuantityDTO productQuantityDTO){
+    public ProductQuantity postProductQuantity(@Valid @RequestBody ProductQuantityDTO productQuantityDTO){
         return productQuantityService.postProductQuantity(productQuantityDTO);
     }
 

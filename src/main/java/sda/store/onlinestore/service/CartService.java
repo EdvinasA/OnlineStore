@@ -20,16 +20,17 @@ public class CartService {
     private ProductRepository productRepository;
 
     public Cart addProductToCart(CartDTO cartDTO) {
+        if (checkIfProductExists(cartDTO)) {
+            return null;
+        }
+        else {
         Cart cart = new Cart();
         Optional<Product> productOpt = productRepository.findById(cartDTO.getProductId());
         Product product = productOpt.orElseThrow(() -> new RuntimeException("Product was not found"));
-        if (checkIfProductExists(cartDTO)) {
-                    return null;
-                }
-                else {
             cart.setProduct(product);
             cart.setQuantity(cartDTO.getQuantity());
-            return cartRepository.save(cart);
+            cartRepository.save(cart);
+            return cart;
         }
     }
 

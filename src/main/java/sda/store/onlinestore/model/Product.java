@@ -16,7 +16,7 @@ import java.util.List;
 @ToString
 @Entity
 @Data
-//@Valid
+@Valid
 public class Product {
 
     @Id
@@ -25,16 +25,17 @@ public class Product {
 
     private String imageUrl;
 
-    //@NotNull
+    @NotNull
     private String title;
 
-    //@NotNull
+    @NotNull
     private String description;
 
-    //@NotNull
-  //  @Positive
+    @NotNull
+    @Positive
     private Double price;
 
+    @NotNull
     private String type;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)

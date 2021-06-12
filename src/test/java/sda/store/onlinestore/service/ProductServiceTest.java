@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 @RunWith(SpringRunner.class)
 class ProductServiceTest extends OnlineStoreApplicationTests {
@@ -26,7 +25,6 @@ class ProductServiceTest extends OnlineStoreApplicationTests {
 
     @Mock
     public ProductRepository productRepository;
-//    public ProductQuantityRepository productQuantityRepository;
 
 
     @Test
@@ -56,6 +54,10 @@ class ProductServiceTest extends OnlineStoreApplicationTests {
         List<Product> product1 = productService.getAllProducts();
 
         assertThat(product1).isEqualTo(expectedProduct);
+    }
+
+    @Test
+    void getProductById_ReturnsNewProduct_BecauseProductDontExist() {
     }
 
     @Test
@@ -98,6 +100,19 @@ class ProductServiceTest extends OnlineStoreApplicationTests {
 
     @Test
     void updateProductById() {
+//        Product product = new Product();
+//        product.setId(1L);
+//        product.setTitle("Computer");
+//        ProductDTO productDTO = new ProductDTO();
+//        productDTO.setTitle("Computers");
+//        productService.updateProductById(1L, productDTO);
+//        List<Product> expectedProducts = new ArrayList<>();
+//        expectedProducts.add(product);
+//
+//        Mockito.when(this.productRepository.findAll()).thenReturn(expectedProducts);
+//        List<Product> product1 = productService.getProductsByTitle("Computers");
+//
+//        assertThat(product1).isEqualTo(expectedProducts);
     }
 
     @Test
