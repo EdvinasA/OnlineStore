@@ -14,6 +14,7 @@ import sda.store.onlinestore.repository.ProductRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -63,7 +64,7 @@ class ProductServiceTest extends OnlineStoreApplicationTests {
         Product product = new Product();
         product.setId(1L);
 
-        Mockito.when(this.productRepository.findProductById(1L)).thenReturn(java.util.Optional.of(product));
+        Mockito.when(this.productRepository.findProductById(1L)).thenReturn(Optional.of(product));
         Product product1 = productService.getProductById(1L);
 
         assertThat(product1).isEqualTo(product);
