@@ -21,21 +21,16 @@ public class CartService {
 
     public Cart addProductToCart(CartDTO cartDTO) {
         Cart cart = new Cart();
+        Optional<Product> productOpt = productRepository.findById(cartDTO.getProductId());
+        Product product = productOpt.orElseThrow(() -> new RuntimeException("Product was not found"));
         if (checkIfProductExists(cartDTO)) {
                     return null;
                 }
                 else {
-            cart.setProduct(getProduct(cartDTO));
+            cart.setProduct(product);
             cart.setQuantity(cartDTO.getQuantity());
-            cartRepository.save(cart);
-            return cart;
+            return cartRepository.save(cart);
         }
-    }
-
-    private Product getProduct(CartDTO cartDTO) {
-        Optional<Product> productOpt = productRepository.findById(cartDTO.getProductId());
-        Product product = productOpt.orElseThrow(() -> new RuntimeException("Product was not found"));
-        return product;
     }
 
     public boolean checkIfProductExists(CartDTO cartDTO) {
