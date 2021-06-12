@@ -33,8 +33,7 @@ public class ProductService {
         product.setPrice(productDTO.getPrice());
         product.setType(productDTO.getType());
         product.setProductQuantities(productDTO.getProductQuantities());
-        productRepository.save(product);
-        return product;
+        return productRepository.save(product);
     }
 
     public List<Product> getAllProducts() {

@@ -29,8 +29,7 @@ public class CartService {
         Product product = productOpt.orElseThrow(() -> new RuntimeException("Product was not found"));
             cart.setProduct(product);
             cart.setQuantity(cartDTO.getQuantity());
-            cartRepository.save(cart);
-            return cart;
+            return cartRepository.save(cart);
         }
     }
 
