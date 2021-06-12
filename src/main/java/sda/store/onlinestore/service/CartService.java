@@ -1,5 +1,6 @@
 package sda.store.onlinestore.service;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sda.store.onlinestore.model.Cart;
@@ -13,11 +14,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class CartService {
-    @Autowired
     private CartRepository cartRepository;
-
-    @Autowired
     private ProductRepository productRepository;
 
     public Cart addProductToCart(CartDTO cartDTO) {
