@@ -1,7 +1,7 @@
 package sda.store.onlinestore.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sda.store.onlinestore.exceptions.NotFoundException;
@@ -15,9 +15,10 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/cart")
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+@AllArgsConstructor
 public class CartController {
-    @Autowired
-    private CartService cartService;
+
+    private final CartService cartService;
 
     @PostMapping()
     public Cart addProductToCart(@Valid @RequestBody CartDTO cartDTO){
@@ -37,11 +38,6 @@ public class CartController {
     @GetMapping
     public List<Cart> getAllCart(){
         return cartService.getAllCart();
-    }
-
-    @GetMapping(value = "/{id}")
-    public Cart getCartEntryById(@PathVariable Long cartId){
-        return cartService.getCartEntryById(cartId);
     }
 
     @GetMapping(value = "/getTotalPrice")
