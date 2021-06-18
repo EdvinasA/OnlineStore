@@ -1,5 +1,6 @@
 package sda.store.onlinestore.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sda.store.onlinestore.model.PurchaseOrderLine;
@@ -13,9 +14,10 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/purchase/order")
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+@AllArgsConstructor
 public class PurchaseOrderLineController {
-    @Autowired
-    private PurchaseOrderLineService purchaseOrderLineService;
+
+    private final PurchaseOrderLineService purchaseOrderLineService;
 
     @PostMapping(value = "/line")
     public PurchaseOrderLine postPurchaseOrderLine(@Valid @RequestBody PurchaseOrderLineDTO purchaseOrderLineDTO){
@@ -26,16 +28,6 @@ public class PurchaseOrderLineController {
     public List<PurchaseOrderLine> createOrderLinesFromCart(@RequestParam Long purchase_order_id){
         purchaseOrderLineService.performOrderLineCreationActions(purchase_order_id);
         return purchaseOrderLineService.getAllPurchaseOrderLineByOrderId(purchase_order_id);
-    }
-
-    @GetMapping(value = "/lines")
-    public List<PurchaseOrderLine> getAllPurchaseOrderLine(){
-        return purchaseOrderLineService.getAllPurchaseOrderLine();
-    }
-
-    @GetMapping(value = "/line/{id}")
-    public PurchaseOrderLine getPurchaseOrderLineById(@PathVariable (required = false) Long id) {
-        return purchaseOrderLineService.getPurchaseOrderLineById(id);
     }
 
     @GetMapping(value = "{id}/lines")
