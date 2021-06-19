@@ -22,7 +22,7 @@ public class CartController {
 
     @PostMapping()
     public Cart addProductToCart(@Valid @RequestBody CartDTO cartDTO){
-        return cartService.addProductToCart(cartDTO);
+        return cartService.addOrUpdateCart(cartDTO);
     }
 
     @GetMapping

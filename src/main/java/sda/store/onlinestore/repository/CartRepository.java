@@ -6,4 +6,6 @@ import sda.store.onlinestore.model.Cart;
 
 @Repository
 public interface CartRepository extends JpaRepository<Cart, Long> {
+    boolean existsCartByProductId(Long id);
+    Cart getByProductId(Long id);
 }
