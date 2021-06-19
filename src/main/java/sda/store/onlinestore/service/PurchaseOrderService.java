@@ -23,8 +23,7 @@ public class PurchaseOrderService {
         purchaseOrder.setUserSurname(purchaseOrderDTO.getUserSurname());
         purchaseOrder.setDeliveryAddress(purchaseOrderDTO.getDeliveryAddress());
         purchaseOrder.setOrderDate(purchaseOrderDTO.getOrderDate());
-        purchaseOrderRepository.save(purchaseOrder);
-        return purchaseOrder;
+        return purchaseOrderRepository.save(purchaseOrder);
     }
 
     public List<PurchaseOrder> getAllPurchaseOrder() {
