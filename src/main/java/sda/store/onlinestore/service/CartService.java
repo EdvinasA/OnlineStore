@@ -1,23 +1,20 @@
 package sda.store.onlinestore.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sda.store.onlinestore.model.Cart;
-import sda.store.onlinestore.model.CartDTO;
-import sda.store.onlinestore.model.Product;
+import sda.store.onlinestore.model.*;
 import sda.store.onlinestore.repository.CartRepository;
 import sda.store.onlinestore.repository.ProductRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class CartService {
-    private CartRepository cartRepository;
-    private ProductRepository productRepository;
+
+    private final CartRepository cartRepository;
+    private final ProductRepository productRepository;
 
     public Cart addProductToCart(CartDTO cartDTO) {
         if (checkIfProductExists(cartDTO)) {
@@ -32,6 +29,22 @@ public class CartService {
             cartRepository.save(cart);
             return cart;
         }
+    }
+
+    public Cart updateCartProductById(Long id, Cart cart) {
+        Cart cartProductToUpdate = getCartEntryById(id);
+        cartProductToUpdate.setProduct(cart.getProduct());
+        if (cart.getQuantity() == 1) {
+        cartProductToUpdate.setQuantity(cartProductToUpdate.getQuantity() + 1);
+        }
+        if (cart.getQuantity() == -1) {
+            if (checkIfCartIsZero(cartProductToUpdate)) {
+                cartProductToUpdate.setQuantity(0.00);
+            } else {
+                cartProductToUpdate.setQuantity(cartProductToUpdate.getQuantity() - 1);
+            }
+        }
+        return cartRepository.save(cartProductToUpdate);
     }
 
     public boolean checkIfProductExists(CartDTO cartDTO) {
@@ -54,22 +67,6 @@ public class CartService {
         return cartRepository.findAll();
     }
 
-    public void addProductQuantityInCart(Long cartId) {
-        Cart cart = getCartEntryById(cartId);
-        cart.setQuantity(cart.getQuantity() + 1);
-        cartRepository.save(cart);
-    }
-
-    public void subtractProductQuantityInCart(Long cartId) {
-        Cart cart = getCartEntryById(cartId);
-        if (checkIfCartIsZero(cart)) {
-            cart.setQuantity(0.00);
-            return;
-        }
-        cart.setQuantity(cart.getQuantity() - 1);
-        cartRepository.save(cart);
-    }
-
     public boolean checkIfCartIsZero(Cart cart) {
         return cart.getQuantity() <= 0;
     }
@@ -81,7 +78,7 @@ public class CartService {
 
     public Double getTotalPrice() {
         double sum = 0;
-        List<Cart> allProducts = new ArrayList<>();
+        List<Cart> allProducts;
         allProducts = getAllCart();
         for (Cart cart:
              allProducts) {

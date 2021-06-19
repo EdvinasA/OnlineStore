@@ -2,11 +2,14 @@ package sda.store.onlinestore.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sda.store.onlinestore.exceptions.NotFoundException;
 import sda.store.onlinestore.model.Cart;
 import sda.store.onlinestore.model.CartDTO;
+import sda.store.onlinestore.model.Product;
+import sda.store.onlinestore.model.ProductDTO;
 import sda.store.onlinestore.service.CartService;
 
 import javax.validation.Valid;
@@ -23,16 +26,6 @@ public class CartController {
     @PostMapping()
     public Cart addProductToCart(@Valid @RequestBody CartDTO cartDTO){
         return cartService.addProductToCart(cartDTO);
-    }
-
-    @PostMapping(value = "/add-quantity")
-    public void addQuantityToCartProduct(@RequestBody Cart cart) {
-        cartService.addProductQuantityInCart(cart.getId());
-    }
-
-    @PostMapping(value = "/subtract-quantity")
-    public void subtractProductQuantityInCart(@RequestBody Cart cart) {
-        cartService.subtractProductQuantityInCart(cart.getId());
     }
 
     @GetMapping
@@ -53,5 +46,10 @@ public class CartController {
             cartService.deleteCartProductById(id);
             return ResponseEntity.ok().build();
         }
+    }
+
+    @PutMapping
+    public ResponseEntity<Cart> updateCartProductById(@RequestBody Cart cart) {
+            return new ResponseEntity(cartService.updateCartProductById(cart.getId(), cart), HttpStatus.OK);
     }
 }
