@@ -1,5 +1,6 @@
 package sda.store.onlinestore.service;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sda.store.onlinestore.model.PurchaseOrder;
@@ -10,9 +11,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class PurchaseOrderService {
-    @Autowired
-    private PurchaseOrderRepository purchaseOrderRepository;
+
+    private final PurchaseOrderRepository purchaseOrderRepository;
 
 
     public PurchaseOrder createPurchaseOrder(PurchaseOrderDTO purchaseOrderDTO) {
@@ -29,8 +31,4 @@ public class PurchaseOrderService {
         return purchaseOrderRepository.findAll();
     }
 
-    public PurchaseOrder getPurchaseOrderById(Long purchase_order_id) {
-        Optional<PurchaseOrder> purchaseOrderOpt = purchaseOrderRepository.findById(purchase_order_id);
-        return purchaseOrderOpt.orElseThrow(() -> new RuntimeException("Purchase order was nor found"));
-    }
 }

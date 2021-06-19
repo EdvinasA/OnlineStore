@@ -1,9 +1,6 @@
 package sda.store.onlinestore.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import sda.store.onlinestore.model.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,12 +11,12 @@ import java.util.Base64;
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class UserController {
 
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public boolean login(@RequestBody User user) {
         return user.getUserName().equals("admin") && user.getPassword().equals("password");
     }
 
-    @RequestMapping("/user")
+    @GetMapping("/user")
     public Principal user(HttpServletRequest request) {
         String authToken = request.getHeader("Authorization")
                 .substring("Basic".length()).trim();

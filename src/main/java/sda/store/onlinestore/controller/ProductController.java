@@ -20,6 +20,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 public class ProductController {
+
     private final ProductService productService;
 
     @PostMapping
@@ -39,28 +40,12 @@ public class ProductController {
         return productService.getAllProductQuantityOnDate(date);
     }
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
-        if (productService.getProductById(id) != null) {
-            return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);
-        }
-        else {
-            throw new NotFoundException("Product not found, productId: " + id);
-        }
-    }
-
     @GetMapping(value = "/{id}/quantity")
     public double getQuantityByProductIdOnDate(@RequestParam("date")
                                                                     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
                                                                 Long productId){
         return productService.getQuantityByProductIdOnDate(date, productId);
     }
-
-
-    @GetMapping(value = "/title")
-    public ResponseEntity<List<Product>> getProductsByTitle(String title) {
-            return new ResponseEntity<>(productService.getProductsByTitle(title), HttpStatus.OK);
-     }
 
     @DeleteMapping(path = "/delete/{id}")
     public ResponseEntity<Void> deleteProductById(@PathVariable Long id) {

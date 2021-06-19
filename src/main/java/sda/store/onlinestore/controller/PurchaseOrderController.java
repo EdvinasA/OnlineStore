@@ -1,5 +1,6 @@
 package sda.store.onlinestore.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sda.store.onlinestore.model.PurchaseOrder;
@@ -13,9 +14,10 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/purchase/order")
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+@AllArgsConstructor
 public class PurchaseOrderController {
-    @Autowired
-    private PurchaseOrderService purchaseOrderService;
+
+    private final PurchaseOrderService purchaseOrderService;
 
     @PostMapping
     public PurchaseOrder postPurchaseOrder(@Valid @RequestBody PurchaseOrderDTO purchaseOrderDTO){
@@ -26,8 +28,4 @@ public class PurchaseOrderController {
         return purchaseOrderService.getAllPurchaseOrder();
     }
 
-    @GetMapping(value = "/{id}")
-    public PurchaseOrder getPurchaseOrderById(@PathVariable Long id){
-        return purchaseOrderService.getPurchaseOrderById(id);
-    }
 }
