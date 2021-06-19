@@ -33,6 +33,17 @@ public class CartService {
         }
     }
 
+    public Cart updateCart(Long cartId, CartDTO cartDTO){
+        Cart cart = getCartEntryById(cartId);
+        Optional<Product> productOpt = productRepository.findById(cartDTO.getProductId());
+        Product product = productOpt.orElseThrow(() -> new RuntimeException("Product was not found"));
+        cart.setProduct(product);
+        cart.setQuantity(cartDTO.getQuantity());
+        return cartRepository.save(cart);
+    }
+
+
+
     public boolean checkIfProductExists(CartDTO cartDTO) {
         List<Cart> allProductsInCart = getAllCart();
         for (Cart cart: allProductsInCart) {
