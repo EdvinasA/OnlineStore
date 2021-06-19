@@ -1,7 +1,10 @@
 package sda.store.onlinestore.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import sda.store.onlinestore.model.User;
+import sda.store.onlinestore.model.UserDTO;
+import sda.store.onlinestore.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
@@ -9,18 +12,22 @@ import java.util.Base64;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+@AllArgsConstructor
 public class UserController {
 
-    @PostMapping("/login")
-    public boolean login(@RequestBody User user) {
-        return user.getUserName().equals("admin") && user.getPassword().equals("password");
-    }
+    private final UserService userService;
 
-    @GetMapping("/user")
-    public Principal user(HttpServletRequest request) {
-        String authToken = request.getHeader("Authorization")
-                .substring("Basic".length()).trim();
-        return () ->  new String(Base64.getDecoder()
-                .decode(authToken)).split(":")[0];
+
+    @PostMapping("/login")
+    public boolean login(@RequestBody UserDTO user) {
+        return true;
     }
+//
+//    @GetMapping("/user")
+//    public Principal user(HttpServletRequest request) {
+//        String authToken = request.getHeader("Authorization")
+//                .substring("Basic".length()).trim();
+//        return () ->  new String(Base64.getDecoder()
+//                .decode(authToken)).split(":")[0];
+//    }
 }
