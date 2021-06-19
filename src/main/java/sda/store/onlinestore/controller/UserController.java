@@ -2,7 +2,6 @@ package sda.store.onlinestore.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import sda.store.onlinestore.model.User;
 import sda.store.onlinestore.model.UserDTO;
 import sda.store.onlinestore.service.UserService;
 
@@ -20,14 +19,14 @@ public class UserController {
 
     @PostMapping("/login")
     public boolean login(@RequestBody UserDTO user) {
-        return true;
+        return userService.loginByUserNameAndPassword(user);
     }
-//
-//    @GetMapping("/user")
-//    public Principal user(HttpServletRequest request) {
-//        String authToken = request.getHeader("Authorization")
-//                .substring("Basic".length()).trim();
-//        return () ->  new String(Base64.getDecoder()
-//                .decode(authToken)).split(":")[0];
-//    }
+
+    @GetMapping("/user")
+    public Principal user(HttpServletRequest request) {
+        String authToken = request.getHeader("Authorization")
+                .substring("Basic".length()).trim();
+        return () ->  new String(Base64.getDecoder()
+                .decode(authToken)).split(":")[0];
+    }
 }
