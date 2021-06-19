@@ -31,19 +31,14 @@ public class CartService {
         }
     }
 
-    public Cart updateCartProductById(Long id, Cart cart) {
-        Cart cartProductToUpdate = getCartEntryById(id);
+    public Cart updateCartProductById(Cart cart) {
+        Cart cartProductToUpdate = getCartEntryById(cart.getId());
         cartProductToUpdate.setProduct(cart.getProduct());
-        if (cart.getQuantity() == 1) {
-        cartProductToUpdate.setQuantity(cartProductToUpdate.getQuantity() + 1);
-        }
-        if (cart.getQuantity() == -1) {
-            if (checkIfCartIsZero(cartProductToUpdate)) {
+            if (checkIfCartIsZeroOrLess(cart)) {
                 cartProductToUpdate.setQuantity(0.00);
             } else {
-                cartProductToUpdate.setQuantity(cartProductToUpdate.getQuantity() - 1);
+                cartProductToUpdate.setQuantity(cart.getQuantity());
             }
-        }
         return cartRepository.save(cartProductToUpdate);
     }
 
@@ -67,7 +62,7 @@ public class CartService {
         return cartRepository.findAll();
     }
 
-    public boolean checkIfCartIsZero(Cart cart) {
+    public boolean checkIfCartIsZeroOrLess(Cart cart) {
         return cart.getQuantity() <= 0;
     }
 
