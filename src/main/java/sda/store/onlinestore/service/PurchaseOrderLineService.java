@@ -81,17 +81,6 @@ public class PurchaseOrderLineService {
         cartRepository.deleteAll();
     }
 
-
-    public List<PurchaseOrderLine> getAllPurchaseOrderLine() {
-        return purchaseOrderLineRepository.findAll();
-    }
-
-
-    public PurchaseOrderLine getPurchaseOrderLineById(Long purchase_order_line_id) {
-        Optional<PurchaseOrderLine> purchaseOrderLineOpt = purchaseOrderLineRepository.findById(purchase_order_line_id);
-        return purchaseOrderLineOpt.orElseThrow(() -> new RuntimeException("Purchase order line was not found"));
-    }
-
     public List<PurchaseOrderLine> getAllPurchaseOrderLineByOrderId(Long id) {
         return purchaseOrderLineRepository.findPurchaseOrderLineByPurchaseOrderId(id);
     }

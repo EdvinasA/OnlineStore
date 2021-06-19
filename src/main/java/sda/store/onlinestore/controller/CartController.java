@@ -1,15 +1,12 @@
 package sda.store.onlinestore.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sda.store.onlinestore.exceptions.NotFoundException;
 import sda.store.onlinestore.model.Cart;
 import sda.store.onlinestore.model.CartDTO;
-import sda.store.onlinestore.model.Product;
-import sda.store.onlinestore.model.ProductDTO;
 import sda.store.onlinestore.service.CartService;
 
 import javax.validation.Valid;
@@ -38,7 +35,7 @@ public class CartController {
         return cartService.getTotalPrice();
     }
 
-    @DeleteMapping(path = "/delete/{id}")
+    @DeleteMapping(path = "/{id}")
     public ResponseEntity<Void> deleteCartProductById(@PathVariable Long id) {
         if (cartService.getCartEntryById(id) == null) {
             throw new NotFoundException("Cart not found, CartId: " + id);
