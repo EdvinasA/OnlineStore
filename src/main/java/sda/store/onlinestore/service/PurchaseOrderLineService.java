@@ -32,8 +32,7 @@ public class PurchaseOrderLineService {
         purchaseOrderLine.setProduct(product);
 
         purchaseOrderLine.setQuantity(purchaseOrderLineDTO.getQuantity());
-        purchaseOrderLineRepository.save(purchaseOrderLine);
-        return purchaseOrderLine;
+        return purchaseOrderLineRepository.save(purchaseOrderLine);
     }
 
     public void performOrderLineCreationActions(Long purchase_order_id){
