@@ -16,4 +16,15 @@ public class UserService {
         User user = userRepository.findUserByUserNameAndPasswordIgnoreCase(userDTO.getUserName(), userDTO.getPassword());
         return user.getUserName().equals(userDTO.getUserName()) && user.getPassword().equals(userDTO.getPassword());
     }
+
+    public User registerNewUser (UserDTO userDTO) {
+        User user = new User();
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setAge(userDTO.getAge());
+        user.setEmail(userDTO.getEmail());
+        user.setUserName(userDTO.getUserName());
+        user.setPassword(userDTO.getPassword());
+        return userRepository.save(user);
+    }
 }
