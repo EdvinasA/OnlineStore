@@ -1,7 +1,6 @@
 package sda.store.onlinestore.model;
 
 import lombok.Data;
-import lombok.Value;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;

@@ -73,6 +73,9 @@ values (1, 'Jonas', 'Jonaitis', 'Aguonų g. 15, Kaunas', '2021-06-02'),
        (2, 'Jonas', 'Jonaitis', 'Aguonų g. 15, Kaunas', '2021-06-10'),
        (3, 'Jonas', 'Jonaitis', 'Aguonų g. 15, Kaunas', '2021-06-13');
 
+insert into USERS (ID,PASSWORD, USER_NAME)
+values (1, 'admin', 'admin');
+
 insert into purchase_order_line(ID, PURCHASE_ORDER_ID, PRODUCT_ID, QUANTITY)
 values (1, 1, 1, 1.0),
        (2, 1, 2, 2.0),
@@ -82,4 +85,6 @@ values (1, 1, 1, 1.0),
        (6, 2, 6, 1.0),
        (7, 3, 1, 5.0),
        (8, 3, 6, 1.0);
+
+
 
