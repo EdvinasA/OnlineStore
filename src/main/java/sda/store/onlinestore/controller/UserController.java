@@ -2,6 +2,7 @@ package sda.store.onlinestore.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import sda.store.onlinestore.model.User;
 import sda.store.onlinestore.model.UserDTO;
 import sda.store.onlinestore.service.UserService;
 
@@ -20,6 +21,11 @@ public class UserController {
     @PostMapping("/login")
     public boolean login(@RequestBody UserDTO user) {
         return userService.loginByUserNameAndPassword(user);
+    }
+
+    @PostMapping("/register")
+    public User register(@RequestBody UserDTO user) {
+        return userService.registerNewUser(user);
     }
 
     @GetMapping("/user")
