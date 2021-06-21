@@ -17,6 +17,7 @@ import sda.store.onlinestore.repository.PurchaseOrderRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -94,6 +95,12 @@ class PurchaseOrderLineServiceTest extends OnlineStoreApplicationTests {
 
     @Test
     void createOrderLinesFromCart() {
+
+        when(cartRepository.findAll()).thenReturn(new ArrayList<>());
+        when(purchaseOrderRepository.findById(anyLong())).thenReturn(Optional.of(new PurchaseOrder()));
+        when(purchaseOrderLineRepository.save(any(PurchaseOrderLine.class))).thenReturn(new PurchaseOrderLine());
+
+        purchaseOrderLineService.createOrderLinesFromCart(1L);
     }
 
     @Test
