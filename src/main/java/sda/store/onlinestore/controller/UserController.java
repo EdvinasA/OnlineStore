@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import sda.store.onlinestore.model.User;
 import sda.store.onlinestore.model.UserDTO;
+import sda.store.onlinestore.model.UserForLogin;
 import sda.store.onlinestore.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +20,7 @@ public class UserController {
 
 
     @PostMapping("/login")
-    public boolean login(@RequestBody UserDTO user) {
+    public boolean login(@RequestBody UserForLogin user) {
         return userService.loginByUserNameAndPassword(user);
     }
 
