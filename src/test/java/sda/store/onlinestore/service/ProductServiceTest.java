@@ -6,8 +6,10 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
+
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import org.springframework.test.context.junit4.SpringRunner;
 import sda.store.onlinestore.OnlineStoreApplicationTests;
 import sda.store.onlinestore.exceptions.NotFoundException;
@@ -36,36 +38,40 @@ class ProductServiceTest extends OnlineStoreApplicationTests {
     @InjectMocks
     private ProductService productService;
 
-
     @BeforeEach
     void setUp() {
         productService = new ProductService(productRepository, productQuantityRepository);
     }
 
-    @Test
-    void whenRegisteredNewProduct() {
-        //given
-        ProductDTO product = new ProductDTO();
-        product.setTitle("product");
+//     @Test
+//     void whenRegisteredNewProduct() {
+//         //given
+//         ProductDTO product = new ProductDTO();
+//         product.setTitle("product");
 
-        Product expectedProduct = new Product();
-        expectedProduct.setId(1L);
-        expectedProduct.setTitle("product");
-        expectedProduct.setImageUrl("assets/images/null");
+// <<<<<<< features/implementing-spring-security
+//         Product expectedProduct = new Product();
+//         expectedProduct.setId(1L);
+//         expectedProduct.setTitle("product");
+//         expectedProduct.setImageUrl("assets/images/null");
 
-        //when
-        productService.newProductRegistration(product);
+//         //when
+//         productService.newProductRegistration(product);
 
-        //then
-        ArgumentCaptor<Product> productArgumentCaptor = ArgumentCaptor.forClass(Product.class);
+//         //then
+//         ArgumentCaptor<Product> productArgumentCaptor = ArgumentCaptor.forClass(Product.class);
+// =======
+//         when(this.productRepository.findAll()).thenReturn(expectedProduct);
+//         List<Product> product1 = productService.getAllProducts();
+// >>>>>>> develop
 
-        verify(productRepository).save(productArgumentCaptor.capture());
+//         verify(productRepository).save(productArgumentCaptor.capture());
 
-        Product capturedProduct = productArgumentCaptor.getValue();
-        capturedProduct.setId(1L);
+//         Product capturedProduct = productArgumentCaptor.getValue();
+//         capturedProduct.setId(1L);
 
-        assertThat(capturedProduct).isEqualTo(expectedProduct);
-    }
+//         assertThat(capturedProduct).isEqualTo(expectedProduct);
+//     }
 
 
     @Test
@@ -77,9 +83,13 @@ class ProductServiceTest extends OnlineStoreApplicationTests {
     }
 
     @Test
-    @Disabled
-    void getProductById_ReturnsNewProduct_BecauseProductDontExist() {
-    }
+    void getProductById() {
+        Product product = new Product();
+        product.setId(1L);
+
+        when(this.productRepository.findProductById(1L)).thenReturn(java.util.Optional.of(product));
+        Product product1 = productService.getProductById(1L);
+        develop
 
     @Test
     void getProductById_Throws_NotFoundException() {
@@ -96,7 +106,7 @@ class ProductServiceTest extends OnlineStoreApplicationTests {
     @Test
     void return_empty_when_ProductList_Empty() {
         List<Product> expected = new ArrayList<>();
-        Mockito.when(this.productRepository.findAll()).thenReturn(expected);
+        when(this.productRepository.findAll()).thenReturn(expected);
         List<Product> product1 = productService.getAllProducts();
 
         assertThat(product1).isEqualTo(expected);
@@ -110,7 +120,7 @@ class ProductServiceTest extends OnlineStoreApplicationTests {
         List<Product> expectedProducts = new ArrayList<>();
         expectedProducts.add(product);
 
-        Mockito.when(this.productRepository.findProductsByTitleIgnoreCase("Computer")).thenReturn(expectedProducts);
+        when(this.productRepository.findProductsByTitleIgnoreCase("Computer")).thenReturn(expectedProducts);
         List<Product> product1 = productService.getProductsByTitle("Computer");
 
         assertThat(product1).isEqualTo(expectedProducts);
