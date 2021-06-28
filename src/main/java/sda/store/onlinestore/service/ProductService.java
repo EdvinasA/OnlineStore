@@ -1,5 +1,6 @@
 package sda.store.onlinestore.service;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
@@ -14,16 +15,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
 @Service
 public class ProductService {
 
     private final ProductRepository productRepository;
     private final ProductQuantityRepository productQuantityRepository;
-
-    public ProductService(ProductRepository productRepository, ProductQuantityRepository productQuantityRepository) {
-        this.productRepository = productRepository;
-        this.productQuantityRepository = productQuantityRepository;
-    }
 
     public Product newProductRegistration(ProductDTO productDTO) {
         Product product = new Product();

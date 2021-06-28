@@ -1,12 +1,18 @@
 package sda.store.onlinestore.service;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import static org.mockito.Mockito.*;
+
+import org.mockito.*;
+import org.mockito.junit.jupiter.MockitoExtension;
+
 import org.springframework.test.context.junit4.SpringRunner;
 import sda.store.onlinestore.OnlineStoreApplicationTests;
+import sda.store.onlinestore.exceptions.NotFoundException;
 import sda.store.onlinestore.model.Product;
 import sda.store.onlinestore.model.ProductDTO;
 import sda.store.onlinestore.repository.ProductQuantityRepository;
@@ -14,54 +20,66 @@ import sda.store.onlinestore.repository.ProductRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.verify;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(MockitoExtension.class)
 class ProductServiceTest extends OnlineStoreApplicationTests {
 
-    @InjectMocks
-    public ProductService productService;
+    @Mock
+    private ProductRepository productRepository;
 
     @Mock
-    public ProductRepository productRepository;
+    private ProductQuantityRepository productQuantityRepository;
 
+    @InjectMocks
+    private ProductService productService;
 
-    @Test
-    void whenRegisteredNewProduct_findCreatedProductById() {
-        Product product = new Product();
-        product.setId(1L);
-        product.setTitle("Computer");
-        product.setPrice(22.53);
-
-        ProductDTO productDTO = new ProductDTO();
-        productDTO.setTitle("Computer");
-        productDTO.setPrice(22.53);
-
-        when(this.productRepository.findProductById(anyLong())).thenReturn(java.util.Optional.of(product));
-        Product product1 = productService.getProductById(1L);
-
-        assertThat(product1).isEqualTo(product);
+    @BeforeEach
+    void setUp() {
+        productService = new ProductService(productRepository, productQuantityRepository);
     }
 
+//     @Test
+//     void whenRegisteredNewProduct() {
+//         //given
+//         ProductDTO product = new ProductDTO();
+//         product.setTitle("product");
+
+// <<<<<<< features/implementing-spring-security
+//         Product expectedProduct = new Product();
+//         expectedProduct.setId(1L);
+//         expectedProduct.setTitle("product");
+//         expectedProduct.setImageUrl("assets/images/null");
+
+//         //when
+//         productService.newProductRegistration(product);
+
+//         //then
+//         ArgumentCaptor<Product> productArgumentCaptor = ArgumentCaptor.forClass(Product.class);
+// =======
+//         when(this.productRepository.findAll()).thenReturn(expectedProduct);
+//         List<Product> product1 = productService.getAllProducts();
+// >>>>>>> develop
+
+//         verify(productRepository).save(productArgumentCaptor.capture());
+
+//         Product capturedProduct = productArgumentCaptor.getValue();
+//         capturedProduct.setId(1L);
+
+//         assertThat(capturedProduct).isEqualTo(expectedProduct);
+//     }
+
+
     @Test
-    void getAllProducts() {
-        Product product = new Product();
-        Product product2 = new Product();
-        product.setId(1L);
-        product2.setId(2L);
-        List<Product> expectedProduct = new ArrayList<>();
-        expectedProduct.add(product);
-        expectedProduct.add(product2);
-
-        when(this.productRepository.findAll()).thenReturn(expectedProduct);
-        List<Product> product1 = productService.getAllProducts();
-
-        assertThat(product1).isEqualTo(expectedProduct);
-    }
-
-    @Test
-    void getProductById_ReturnsNewProduct_BecauseProductDontExist() {
+    void canGetAllProducts() {
+        // when
+        productService.getAllProducts();
+        //then
+        verify(productRepository).findAll();
     }
 
     @Test
@@ -71,9 +89,19 @@ class ProductServiceTest extends OnlineStoreApplicationTests {
 
         when(this.productRepository.findProductById(1L)).thenReturn(java.util.Optional.of(product));
         Product product1 = productService.getProductById(1L);
+        develop
 
-        assertThat(product1).isEqualTo(product);
+    @Test
+    void getProductById_Throws_NotFoundException() {
+        //given
+        Long id = 2L;
+        //when
+        // then
+        assertThatThrownBy(() -> productService.getProductById(id))
+                .isInstanceOf(NotFoundException.class)
+                .hasMessageContaining("Product id = %d not found", id);
     }
+
 
     @Test
     void return_empty_when_ProductList_Empty() {
@@ -99,31 +127,17 @@ class ProductServiceTest extends OnlineStoreApplicationTests {
     }
 
     @Test
-    void deleteProductById() {
-    }
-
-    @Test
     void updateProductById() {
-//        Product product = new Product();
-//        product.setId(1L);
-//        product.setTitle("Computer");
-//        ProductDTO productDTO = new ProductDTO();
-//        productDTO.setTitle("Computers");
-//        productService.updateProductById(1L, productDTO);
-//        List<Product> expectedProducts = new ArrayList<>();
-//        expectedProducts.add(product);
-//
-//        Mockito.when(this.productRepository.findAll()).thenReturn(expectedProducts);
-//        List<Product> product1 = productService.getProductsByTitle("Computers");
-//
-//        assertThat(product1).isEqualTo(expectedProducts);
+
     }
 
     @Test
+    @Disabled
     void getAllProductQuantityOnDate() {
     }
 
     @Test
+    @Disabled
     void getQuantityByProductIdOnDate() {
     }
 }

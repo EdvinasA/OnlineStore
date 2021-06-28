@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import sda.store.onlinestore.model.User;
 import sda.store.onlinestore.model.UserDTO;
+import sda.store.onlinestore.model.UserForLogin;
 import sda.store.onlinestore.repository.UserRepository;
 
 @Service
@@ -12,8 +13,9 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public boolean loginByUserNameAndPassword(UserDTO userDTO) {
+    public boolean loginByUserNameAndPassword(UserForLogin userDTO) {
         User user = userRepository.findUserByUserNameAndPasswordIgnoreCase(userDTO.getUserName(), userDTO.getPassword());
+
         return user.getUserName().equals(userDTO.getUserName()) && user.getPassword().equals(userDTO.getPassword());
     }
 
