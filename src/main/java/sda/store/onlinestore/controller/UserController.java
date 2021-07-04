@@ -21,13 +21,22 @@ public class UserController {
 
     @PostMapping("/login")
     public boolean login(@RequestBody UserForLogin user) {
+        System.out.println(user);
         return userService.loginByUserNameAndPassword(user);
     }
 
-    @PostMapping("/register")
-    public User register(@RequestBody UserDTO user) {
+    @PostMapping("/register-user")
+    public User registerUser(@RequestBody UserDTO user) {
         return userService.registerNewUser(user);
     }
+
+    @PostMapping("/register-admin")
+    public User registerAdmin(@RequestBody UserDTO user) {
+        return userService.registerNewAdmin(user);
+    }
+
+    @GetMapping(value = "/get-role/{userName}")
+    public User getRoleByUserName(@PathVariable String userName) {return userService.getLoggedInUserRoleByUserName(userName); }
 
     @GetMapping("/user")
     public Principal user(HttpServletRequest request) {
