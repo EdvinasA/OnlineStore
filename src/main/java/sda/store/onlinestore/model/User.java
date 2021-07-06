@@ -33,9 +33,13 @@ public class User {
 
     private String role;
 
-//    @OneToMany(mappedBy = "user")
-//    @JsonIgnore
-//    private List<PurchaseOrder> purchaseOrder;
+    @OneToMany
+    @JsonIgnore
+    private List<PurchaseOrder> purchaseOrder;
+
+    @OneToMany
+    @JsonIgnore
+    private List<Cart> cart;
 
 
 

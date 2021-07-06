@@ -19,7 +19,6 @@ public class UserController {
 
     private final UserService userService;
 
-
     @PostMapping("/login")
     public boolean login(@RequestBody UserForLogin user) {
         System.out.println(user);

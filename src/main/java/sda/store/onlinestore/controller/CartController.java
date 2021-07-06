@@ -20,14 +20,17 @@ public class CartController {
 
     private final CartService cartService;
 
-    @PostMapping()
-    public Cart addProductToCart(@Valid @RequestBody CartDTO cartDTO){
-        return cartService.addProductToCart(cartDTO);
+    @PostMapping(value = "/{userId}")
+    public Cart addProductToCart(@Valid @RequestBody CartDTO cartDTO, @PathVariable String userId){
+        return cartService.addProductToCart(cartDTO, userId);
     }
 
-    @GetMapping
-    public List<Cart> getAllCart(){
-        return cartService.getAllCart();
+    @GetMapping(value = "/{userId}")
+    public List<Cart> getAllCart(@PathVariable String userId){
+        if (userId.equals("null")) {
+            return null;
+        }
+        return cartService.getAllCartByUserId(userId);
     }
 
     @GetMapping(value = "/getTotalPrice")
