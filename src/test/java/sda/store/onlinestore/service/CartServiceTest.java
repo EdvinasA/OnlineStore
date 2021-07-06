@@ -1,13 +1,12 @@
 package sda.store.onlinestore.service;
 
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import sda.store.onlinestore.OnlineStoreApplicationTests;
 import sda.store.onlinestore.model.Cart;
 import sda.store.onlinestore.model.CartDTO;
 import sda.store.onlinestore.model.Product;
@@ -23,10 +22,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
-
-//@RunWith(MockitoJUnitRunner.class)
 @ExtendWith(MockitoExtension.class)
-class CartServiceTest {
+class CartServiceTest extends OnlineStoreApplicationTests {
 
     @Mock
     private CartRepository cartRepository;
@@ -36,12 +33,6 @@ class CartServiceTest {
 
     @InjectMocks
     private CartService cartService = new CartService(this.cartRepository, this.productRepository);
-
-    @Before
-    public void setup(){
-        MockitoAnnotations.initMocks(this); //without this you will get NPE
-        this.cartService = new CartService(this.cartRepository, this.productRepository);
-    }
 
     @Test
     void when_addProductToCart_it_should_return_cart() {
@@ -143,28 +134,6 @@ class CartServiceTest {
         assertThat(result).isEqualTo(true);
     }
 
-    /*@Test
-    void dele() {
-        Product product1 = new Product();
-        product1.setId(1L);
-        product1.setDescription("Large disc");
-        product1.setPrice(50.99);
-        product1.setTitle("Disc");
-        product1.setType("Computer");
-        product1.setImageUrl("");
-
-        Cart cart1 = new Cart();
-        cart1.setId(1L);
-        cart1.setProduct(product1);
-        cart1.setQuantity(1.0);
-
-       // when(cartRepository.findById(cart1.getId())).thenReturn(Optional.of(cart1));
-        //when(cartRepository.deleteById(anyLong()));
-        cartService.deleteCartProductById(1L);
-
-        verify(cartRepository).deleteById(cart1.getId());
-    }*/
-
     @Test
     void when_getAllCart_it_should_return_cart_list() {
         Product product = new Product();
@@ -191,18 +160,6 @@ class CartServiceTest {
         assertThat(result).isSameAs(cartList);
     }
 
-/*    @Test
-    void addProductQuantityInCart() {
-    }
-
-    @Test
-    void subtractProductQuantityInCart() {
-    }
-
-    @Test
-    void checkIfCartIsZero() {
-    }*/
-
     @Test
     void when_getCartEntryById_return_Cart_entry_with_specified_id() {
         Product product = new Product();
@@ -225,7 +182,7 @@ class CartServiceTest {
     }
 
     @Test
-    void given_cart_products_return_92_97() {
+    void given_cart_products_return_total_price_92_97() {
         Product product1 = new Product();
         product1.setId(1L);
         product1.setDescription("Large disc");
@@ -262,5 +219,4 @@ class CartServiceTest {
 
         assertThat(result).isEqualTo(92.97);
     }
-
 }
