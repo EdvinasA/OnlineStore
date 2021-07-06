@@ -73,9 +73,9 @@ values (1, 'Jonas', 'Jonaitis', 'Aguonų g. 15, Kaunas', '2021-06-02'),
        (2, 'Jonas', 'Jonaitis', 'Aguonų g. 15, Kaunas', '2021-06-10'),
        (3, 'Jonas', 'Jonaitis', 'Aguonų g. 15, Kaunas', '2021-06-13');
 
-insert into USERS (ID,PASSWORD, USER_NAME)
-values (1, 'admin', 'admin'),
-       (2, 'user', 'user');
+insert into USERS (ID,PASSWORD, USER_NAME, ROLE)
+values (1, 'admin', 'admin', 'ADMIN'),
+       (2, 'user', 'user', 'USER');
 
 insert into purchase_order_line(ID, PURCHASE_ORDER_ID, PRODUCT_ID, QUANTITY)
 values (1, 1, 1, 1.0),

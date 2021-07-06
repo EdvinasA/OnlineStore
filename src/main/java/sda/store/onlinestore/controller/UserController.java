@@ -10,6 +10,7 @@ import sda.store.onlinestore.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Base64;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
@@ -21,12 +22,26 @@ public class UserController {
 
     @PostMapping("/login")
     public boolean login(@RequestBody UserForLogin user) {
+        System.out.println(user);
         return userService.loginByUserNameAndPassword(user);
     }
 
-    @PostMapping("/register")
-    public User register(@RequestBody UserDTO user) {
+    @PostMapping("/register-user")
+    public User registerUser(@RequestBody UserDTO user) {
         return userService.registerNewUser(user);
+    }
+
+    @PostMapping("/register-admin")
+    public User registerAdmin(@RequestBody UserDTO user) {
+        return userService.registerNewAdmin(user);
+    }
+
+    @GetMapping(value = "/get-role/{userName}")
+    public User getRoleByUserName(@PathVariable String userName) {return userService.getLoggedInUserRoleByUserName(userName); }
+
+    @GetMapping(value = "/find-all-users")
+    public List<User> getAllUsers(){
+        return userService.findAllUsers();
     }
 
     @GetMapping("/user")

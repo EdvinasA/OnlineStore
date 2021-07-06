@@ -1,9 +1,11 @@
 package sda.store.onlinestore.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "USERS")
 @Data
@@ -28,6 +30,13 @@ public class User {
 
     @Column(name = "PASSWORD")
     private String password;
+
+    private String role;
+
+//    @OneToMany(mappedBy = "user")
+//    @JsonIgnore
+//    private List<PurchaseOrder> purchaseOrder;
+
 
 
 
