@@ -10,6 +10,7 @@ import sda.store.onlinestore.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Base64;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
@@ -37,6 +38,11 @@ public class UserController {
 
     @GetMapping(value = "/get-role/{userName}")
     public User getRoleByUserName(@PathVariable String userName) {return userService.getLoggedInUserRoleByUserName(userName); }
+
+    @GetMapping(value = "/find-all-users")
+    public List<User> getAllUsers(){
+        return userService.findAllUsers();
+    }
 
     @GetMapping("/user")
     public Principal user(HttpServletRequest request) {

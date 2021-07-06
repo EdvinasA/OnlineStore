@@ -9,6 +9,7 @@ import sda.store.onlinestore.model.UserDTO;
 import sda.store.onlinestore.model.UserForLogin;
 import sda.store.onlinestore.repository.UserRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -55,5 +56,9 @@ public class UserService {
         System.out.println(userName);
         User user = userRepository.findUserByUserNameIgnoreCase(userName);
         return user;
+    }
+
+    public List<User> findAllUsers(){
+        return userRepository.findAll();
     }
 }
