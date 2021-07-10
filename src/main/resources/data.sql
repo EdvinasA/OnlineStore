@@ -64,18 +64,19 @@ VALUES (1, 'Dell XP 15266','assets/images/unnamed1.png', '512 SSD PCIe  USB 3.2 
 insert into product_quantity (ID, PRODUCT_ID, QUANTITY, DATE)
 values (1, 1, 20.00, '2021-05-31');
 
-insert into cart (ID, PRODUCT_ID, QUANTITY)
-values (1, 1, 3),
-       (2, 2, 5);
+insert into USERS (ID,PASSWORD, USER_NAME, ROLE)
+values (1, 'admin', 'admin', 'ADMIN'),
+       (2, 'user', 'user', 'USER');
 
-insert into purchase_order (ID, USER_NAME, USER_SURNAME, DELIVERY_ADDRESS, ORDER_DATE)
-values (1, 'Jonas', 'Jonaitis', 'Aguonų g. 15, Kaunas', '2021-06-02'),
-       (2, 'Jonas', 'Jonaitis', 'Aguonų g. 15, Kaunas', '2021-06-10'),
-       (3, 'Jonas', 'Jonaitis', 'Aguonų g. 15, Kaunas', '2021-06-13');
+insert into purchase_order (ID, USER_NAME, USER_SURNAME, DELIVERY_ADDRESS, ORDER_DATE, USER_ID)
+values (1, 'Jonas', 'Jonaitis', 'Aguonų g. 15, Kaunas', '2021-06-02', 2),
+       (2, 'Jonas', 'Jonaitis', 'Aguonų g. 15, Kaunas', '2021-06-10', 2),
+       (3, 'Jonas', 'Jonaitis', 'Aguonų g. 15, Kaunas', '2021-06-13', 2);
 
-insert into USERS (ID,PASSWORD, USER_NAME)
-values (1, 'admin', 'admin'),
-       (2, 'user', 'user');
+insert into cart (ID, PRODUCT_ID, QUANTITY, USER_ID)
+values (1, 1, 3, 2),
+       (2, 2, 5, 2);
+
 
 insert into purchase_order_line(ID, PURCHASE_ORDER_ID, PRODUCT_ID, QUANTITY)
 values (1, 1, 1, 1.0),

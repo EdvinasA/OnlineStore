@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import sda.store.onlinestore.model.*;
 import sda.store.onlinestore.repository.CartRepository;
 import sda.store.onlinestore.repository.ProductRepository;
+import sda.store.onlinestore.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,19 +16,22 @@ public class CartService {
 
     private final CartRepository cartRepository;
     private final ProductRepository productRepository;
+    private final UserRepository userRepository;
 
-    public Cart addProductToCart(CartDTO cartDTO) {
+    public Cart addProductToCart(CartDTO cartDTO, String userId) {
         if (checkIfProductExists(cartDTO)) {
             return null;
         }
         else {
         Cart cart = new Cart();
+        Optional<User> userOpt = userRepository.findById(Long.parseLong(userId));
+        User user = userOpt.orElseThrow(() -> new RuntimeException("User was not found"));
         Optional<Product> productOpt = productRepository.findById(cartDTO.getProductId());
         Product product = productOpt.orElseThrow(() -> new RuntimeException("Product was not found"));
             cart.setProduct(product);
             cart.setQuantity(cartDTO.getQuantity());
-            cartRepository.save(cart);
-            return cart;
+            cart.setUser(user);
+            return cartRepository.save(cart);
         }
     }
 
@@ -62,6 +66,12 @@ public class CartService {
         return cartRepository.findAll();
     }
 
+    public List<Cart> getAllCartByUserId(String userId) {
+        Optional<User> userOpt = userRepository.findById(Long.parseLong(userId));
+        User user = userOpt.orElseThrow(() -> new RuntimeException("User was not found"));
+        return cartRepository.findAllByUser(user);
+    }
+
     public boolean checkIfCartIsZeroOrLess(Cart cart) {
         return cart.getQuantity() <= 0;
     }
@@ -71,10 +81,10 @@ public class CartService {
         return cartOpt.orElseThrow(() -> new RuntimeException("Cart entry was nor found"));
     }
 
-    public Double getTotalPrice() {
+    public Double getTotalPriceByUserId(String userId) {
         double sum = 0;
         List<Cart> allProducts;
-        allProducts = getAllCart();
+        allProducts = getAllCartByUserId(userId);
         for (Cart cart:
              allProducts) {
            double productSum = cart.getProduct().getPrice() * cart.getQuantity();

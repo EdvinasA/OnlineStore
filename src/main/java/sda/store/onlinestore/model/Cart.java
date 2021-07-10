@@ -22,4 +22,8 @@ public class Cart {
     @Min(value = 0, message = "Quantity cannot be less than zero!")
     private Double quantity;
 
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    private User user;
+
 }

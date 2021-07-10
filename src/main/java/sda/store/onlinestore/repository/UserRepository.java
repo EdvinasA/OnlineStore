@@ -8,4 +8,5 @@ import sda.store.onlinestore.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     User findUserByUserNameAndPasswordIgnoreCase(String userName, String password);
+    User findUserByUserNameIgnoreCase(String userName);
 }

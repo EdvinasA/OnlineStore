@@ -31,4 +31,7 @@ public class PurchaseOrder {
     @JsonIgnore
     private List<PurchaseOrderLine> purchaseOrderLines;
 
+    @ManyToOne
+    private User user;
+
 }
