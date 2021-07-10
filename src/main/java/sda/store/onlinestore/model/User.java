@@ -33,11 +33,11 @@ public class User {
 
     private String role;
 
-    @OneToMany
+    @OneToMany(orphanRemoval = true)
     @JsonIgnore
     private List<PurchaseOrder> purchaseOrder;
 
-    @OneToMany
+    @OneToMany(orphanRemoval = true)
     @JsonIgnore
     private List<Cart> cart;
 

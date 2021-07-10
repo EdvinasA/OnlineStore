@@ -81,10 +81,10 @@ public class CartService {
         return cartOpt.orElseThrow(() -> new RuntimeException("Cart entry was nor found"));
     }
 
-    public Double getTotalPrice() {
+    public Double getTotalPriceByUserId(String userId) {
         double sum = 0;
         List<Cart> allProducts;
-        allProducts = getAllCart();
+        allProducts = getAllCartByUserId(userId);
         for (Cart cart:
              allProducts) {
            double productSum = cart.getProduct().getPrice() * cart.getQuantity();

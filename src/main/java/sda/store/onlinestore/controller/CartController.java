@@ -33,9 +33,9 @@ public class CartController {
         return cartService.getAllCartByUserId(userId);
     }
 
-    @GetMapping(value = "/getTotalPrice")
-    public Double getTotalPrice() {
-        return cartService.getTotalPrice();
+    @GetMapping(value = "/getTotalPrice/{userId}")
+    public Double getTotalPrice(@PathVariable String userId) {
+        return cartService.getTotalPriceByUserId(userId);
     }
 
     @DeleteMapping(path = "/{id}")

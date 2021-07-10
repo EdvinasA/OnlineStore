@@ -31,4 +31,8 @@ public class PurchaseOrderService {
         return purchaseOrderRepository.findAll();
     }
 
+    public List<PurchaseOrder> getAllPurchaseOrderByUserId(String userId) {
+        return purchaseOrderRepository.findAllByUserId(Long.parseLong(userId));
+    }
+
 }
