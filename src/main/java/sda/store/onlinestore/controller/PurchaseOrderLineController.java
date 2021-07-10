@@ -35,9 +35,9 @@ public class PurchaseOrderLineController {
         return purchaseOrderLineService.getAllPurchaseOrderLineByOrderId(id);
     }
 
-    @GetMapping(value = "/totals")
-    public List<PurchaseOrderTotalCostResponse> getAllPurchaseOrdersCost(){
-        return purchaseOrderLineService.getAllPurchaseOrdersCost();
+    @GetMapping(value = "/totals/{userId}")
+    public List<PurchaseOrderTotalCostResponse> getAllPurchaseOrdersCost(@PathVariable String userId){
+        return purchaseOrderLineService.getAllPurchaseOrdersCostByUserId(userId);
     }
 
     @GetMapping(value = "{id}/total")

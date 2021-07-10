@@ -97,6 +97,18 @@ public class PurchaseOrderLineService {
         return purchaseOrderTotalCostResponses;
     }
 
+    public List<PurchaseOrderTotalCostResponse> getAllPurchaseOrdersCostByUserId(String userId) {
+        List<PurchaseOrderTotalCostResponse> purchaseOrderTotalCostResponses = new ArrayList<>();
+        List<PurchaseOrder> purchaseOrders = purchaseOrderRepository.findAllByUserId(Long.parseLong(userId));
+        for (PurchaseOrder purchaseOrder: purchaseOrders) {
+            PurchaseOrderTotalCostResponse purchaseOrderTotalCostResponse = new PurchaseOrderTotalCostResponse();
+            purchaseOrderTotalCostResponse.setPurchaseOrder(purchaseOrder);
+            purchaseOrderTotalCostResponse.setTotalCost(getPurchaseOrderCostByOrderId(purchaseOrder.getId()));
+            purchaseOrderTotalCostResponses.add(purchaseOrderTotalCostResponse);
+        }
+        return purchaseOrderTotalCostResponses;
+    }
+
     public double getPurchaseOrderCostByOrderId(Long purchase_order_id){
         double totalCost = 0;
         List<PurchaseOrderLine> purchaseOrderLines = purchaseOrderLineRepository.findPurchaseOrderLineByPurchaseOrderId(purchase_order_id);
