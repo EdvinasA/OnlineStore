@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity(name = "USERS")
@@ -25,6 +27,7 @@ public class User {
 
     private Integer age;
 
+    @NotEmpty
     @Column(name = "USER_NAME")
     private String userName;
 
