@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.OneToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -20,13 +21,13 @@ public class PurchaseOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //@Max(value = 100, message = "User name should not be longer than 100")
+    @Size(max = 100, message = "User name should not be longer than 100")
     private String userName;
 
-    //@Max(value = 100, message = "User surname should not be longer than 100")
+    @Size(max = 100, message = "User surname should not be longer than 100")
     private String userSurname;
 
-    //@Max(value = 100, message = "Delivery address should not be longer than 100")
+    @Size(max = 100, message = "Delivery address should not be longer than 100")
     private String deliveryAddress;
 
     //@FutureOrPresent(message = "Order date should be today or the future")

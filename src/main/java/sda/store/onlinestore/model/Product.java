@@ -11,8 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import java.util.List;
 
 @ToString
@@ -27,17 +25,12 @@ public class Product {
 
     private String imageUrl;
 
-    @NotNull
     private String title;
 
-    @NotNull
     private String description;
 
-    @NotNull
-    @Positive
     private Double price;
 
-    @NotNull
     private String type;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)

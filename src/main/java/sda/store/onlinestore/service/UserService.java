@@ -2,8 +2,6 @@ package sda.store.onlinestore.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import sda.store.onlinestore.enums.Role;
-import sda.store.onlinestore.model.Product;
 import sda.store.onlinestore.model.User;
 import sda.store.onlinestore.model.UserDTO;
 import sda.store.onlinestore.model.UserForLogin;
