@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.GenerationType;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Min;
 import java.time.LocalDate;
 
 @Entity
@@ -24,7 +24,7 @@ public class ProductQuantity {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    @Size(min = 0, message = "Quantity cannot be less than zero")
+    @Min(value = 0, message = "Value cannot be less than zero!")
     private Double quantity;
 
     //@FutureOrPresent(message = "Quantity date should be today or the future")
