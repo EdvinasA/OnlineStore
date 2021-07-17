@@ -62,7 +62,20 @@ VALUES (1, 'Dell XP 15266','assets/images/unnamed1.png', '512 SSD PCIe  USB 3.2 
 
 
 insert into product_quantity (ID, PRODUCT_ID, QUANTITY, DATE)
-values (1, 1, 20.00, '2021-05-31');
+values (1, 1, 20.00, '2021-05-31'),
+       (2, 2, 20.00, '2021-05-31'),
+       (3, 3, 20.00, '2021-05-31'),
+       (4, 4, 20.00, '2021-05-31'),
+       (5, 5, 20.00, '2021-05-31'),
+       (6, 6, 20.00, '2021-05-31'),
+       (7, 7, 20.00, '2021-05-31'),
+       (8, 8, 20.00, '2021-05-31'),
+       (9, 9, 20.00, '2021-05-31'),
+       (10, 10, 20.00, '2021-05-31'),
+       (11, 11, 20.00, '2021-05-31'),
+       (12, 12, 20.00, '2021-05-31'),
+       (13, 13, 20.00, '2021-05-31'),
+       (14, 14, 20.00, '2021-05-31');
 
 insert into USERS (ID, FIRST_NAME, LAST_NAME, EMAIL,AGE  ,PASSWORD, USER_NAME, ROLE)
 values (1, 'admin', 'admin', 'admin@gmail.com', 55 ,'admin', 'admin', 'ADMIN'),
