@@ -36,7 +36,9 @@ public class UserController {
     }
 
     @GetMapping(value = "/get-role/{userName}")
-    public User getRoleByUserName(@PathVariable String userName) {return userService.getLoggedInUserRoleByUserName(userName); }
+    public User getRoleByUserName(@PathVariable String userName) {
+        return userService.getLoggedInUserRoleByUserName(userName);
+    }
 
     @GetMapping(value = "/find-all-users")
     public List<User> getAllUsers(){

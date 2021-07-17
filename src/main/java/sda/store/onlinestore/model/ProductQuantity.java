@@ -1,10 +1,14 @@
 package sda.store.onlinestore.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
-import javax.persistence.*;
-import javax.validation.constraints.FutureOrPresent;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.GenerationType;
 import javax.validation.constraints.Min;
 import java.time.LocalDate;
 
@@ -20,7 +24,7 @@ public class ProductQuantity {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    //@Min(value = 0, message = "Quantity cannot be < 0")
+    @Min(value = 0, message = "Value cannot be less than zero!")
     private Double quantity;
 
     //@FutureOrPresent(message = "Quantity date should be today or the future")
