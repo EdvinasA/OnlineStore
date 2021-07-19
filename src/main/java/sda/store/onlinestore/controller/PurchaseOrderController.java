@@ -19,9 +19,9 @@ public class PurchaseOrderController {
 
     private final PurchaseOrderService purchaseOrderService;
 
-    @PostMapping
-    public PurchaseOrder postPurchaseOrder(@Valid @RequestBody PurchaseOrderDTO purchaseOrderDTO){
-        return purchaseOrderService.createPurchaseOrder(purchaseOrderDTO);
+    @PostMapping("/{userId}")
+    public PurchaseOrder postPurchaseOrder(@Valid @RequestBody PurchaseOrderDTO purchaseOrderDTO, @PathVariable String userId){
+        return purchaseOrderService.createPurchaseOrder(purchaseOrderDTO, userId);
     }
     @GetMapping(value = "/{userId}")
     public List<PurchaseOrder> getAllPurchaseOrderByUserId(@PathVariable String userId){

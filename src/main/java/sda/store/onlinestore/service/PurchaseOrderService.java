@@ -5,8 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sda.store.onlinestore.model.PurchaseOrder;
 import sda.store.onlinestore.model.PurchaseOrderDTO;
+import sda.store.onlinestore.model.User;
 import sda.store.onlinestore.repository.PurchaseOrderRepository;
+import sda.store.onlinestore.repository.UserRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,14 +18,18 @@ import java.util.Optional;
 public class PurchaseOrderService {
 
     private final PurchaseOrderRepository purchaseOrderRepository;
+    private final UserRepository userRepository;
 
 
-    public PurchaseOrder createPurchaseOrder(PurchaseOrderDTO purchaseOrderDTO) {
+    public PurchaseOrder createPurchaseOrder(PurchaseOrderDTO purchaseOrderDTO, String userId) {
         PurchaseOrder purchaseOrder = new PurchaseOrder();
+        Optional<User> userOpt = userRepository.findById(Long.parseLong(userId));
+        User user = userOpt.orElseThrow(() -> new RuntimeException("User was not found"));
         purchaseOrder.setUserName(purchaseOrderDTO.getUserName());
         purchaseOrder.setUserSurname(purchaseOrderDTO.getUserSurname());
         purchaseOrder.setDeliveryAddress(purchaseOrderDTO.getDeliveryAddress());
-        purchaseOrder.setOrderDate(purchaseOrderDTO.getOrderDate());
+        purchaseOrder.setOrderDate(LocalDate.now());
+        purchaseOrder.setUser(user);
         purchaseOrderRepository.save(purchaseOrder);
         return purchaseOrder;
     }
