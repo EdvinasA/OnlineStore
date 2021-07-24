@@ -1,9 +1,13 @@
 package sda.store.onlinestore.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 
 @Entity
 @Data
@@ -23,6 +27,10 @@ public class PurchaseOrderLine {
 
     //@Min(value = 0, message = "Quantity cannot be < 0")
     private Double quantity;
+
+
+
+
 
 
 

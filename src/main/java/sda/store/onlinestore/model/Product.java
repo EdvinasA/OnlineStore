@@ -3,20 +3,20 @@ package sda.store.onlinestore.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.ToString;
-import sda.store.onlinestore.enums.ProductType;
 
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import java.util.List;
 
 @ToString
 @Entity
 @Data
-//@Valid
+@Valid
 public class Product {
 
     @Id
@@ -25,14 +25,10 @@ public class Product {
 
     private String imageUrl;
 
-    //@NotNull
     private String title;
 
-    //@NotNull
     private String description;
 
-    //@NotNull
-  //  @Positive
     private Double price;
 
     private String type;

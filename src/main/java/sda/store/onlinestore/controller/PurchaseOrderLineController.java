@@ -1,5 +1,6 @@
 package sda.store.onlinestore.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sda.store.onlinestore.model.PurchaseOrderLine;
@@ -7,17 +8,19 @@ import sda.store.onlinestore.model.PurchaseOrderLineDTO;
 import sda.store.onlinestore.model.responseBody.PurchaseOrderTotalCostResponse;
 import sda.store.onlinestore.service.PurchaseOrderLineService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/purchase/order")
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+@AllArgsConstructor
 public class PurchaseOrderLineController {
-    @Autowired
-    private PurchaseOrderLineService purchaseOrderLineService;
+
+    private final PurchaseOrderLineService purchaseOrderLineService;
 
     @PostMapping(value = "/line")
-    public PurchaseOrderLine postPurchaseOrderLine(@RequestBody PurchaseOrderLineDTO purchaseOrderLineDTO){
+    public PurchaseOrderLine postPurchaseOrderLine(@Valid @RequestBody PurchaseOrderLineDTO purchaseOrderLineDTO){
         return purchaseOrderLineService.addProductToPurchaseOrderLine(purchaseOrderLineDTO);
     }
 
@@ -27,24 +30,14 @@ public class PurchaseOrderLineController {
         return purchaseOrderLineService.getAllPurchaseOrderLineByOrderId(purchase_order_id);
     }
 
-    @GetMapping(value = "/lines")
-    public List<PurchaseOrderLine> getAllPurchaseOrderLine(){
-        return purchaseOrderLineService.getAllPurchaseOrderLine();
-    }
-
-    @GetMapping(value = "/line/{id}")
-    public PurchaseOrderLine getPurchaseOrderLineById(@PathVariable (required = false) Long id) {
-        return purchaseOrderLineService.getPurchaseOrderLineById(id);
-    }
-
     @GetMapping(value = "{id}/lines")
     public List<PurchaseOrderLine> getPurchaseOrderLineByOrderId(@PathVariable (required = false) Long id){
         return purchaseOrderLineService.getAllPurchaseOrderLineByOrderId(id);
     }
 
-    @GetMapping(value = "/totals")
-    public List<PurchaseOrderTotalCostResponse> getAllPurchaseOrdersCost(){
-        return purchaseOrderLineService.getAllPurchaseOrdersCost();
+    @GetMapping(value = "/totals/{userId}")
+    public List<PurchaseOrderTotalCostResponse> getAllPurchaseOrdersCost(@PathVariable String userId){
+        return purchaseOrderLineService.getAllPurchaseOrdersCostByUserId(userId);
     }
 
     @GetMapping(value = "{id}/total")

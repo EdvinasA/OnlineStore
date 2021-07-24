@@ -1,7 +1,6 @@
 package sda.store.onlinestore.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +20,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 public class ProductController {
+
     private final ProductService productService;
 
     @PostMapping
@@ -34,26 +34,10 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-   /* @GetMapping(value = "/{id}")
-    public Product getProductById(@PathVariable("id") Long id) {
-        return productService.getProductById(id);
-    } */
-
     @GetMapping(value = "/get-all/quantity")
     public List<ProductQuantityResponse> getAllProductQuantityOnDate(@RequestParam("date")
                                                          @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date){
         return productService.getAllProductQuantityOnDate(date);
-    }
-
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
-        if (productService.getProductById(id) != null) {
-            return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);
-        }
-        else {
-           // return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            throw new NotFoundException("Product not found, productId: " + id);
-        }
     }
 
     @GetMapping(value = "/{id}/quantity")
@@ -62,12 +46,6 @@ public class ProductController {
                                                                 Long productId){
         return productService.getQuantityByProductIdOnDate(date, productId);
     }
-
-
-    @GetMapping(value = "/title")
-    public ResponseEntity<List<Product>> getProductsByTitle(String title) {
-            return new ResponseEntity<>(productService.getProductsByTitle(title), HttpStatus.OK);
-     }
 
     @DeleteMapping(path = "/delete/{id}")
     public ResponseEntity<Void> deleteProductById(@PathVariable Long id) {

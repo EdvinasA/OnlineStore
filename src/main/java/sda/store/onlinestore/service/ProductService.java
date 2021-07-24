@@ -1,31 +1,22 @@
 package sda.store.onlinestore.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 
-import org.springframework.util.Assert;
 import sda.store.onlinestore.exceptions.NotFoundException;
 import sda.store.onlinestore.model.Product;
 import sda.store.onlinestore.model.ProductDTO;
-import sda.store.onlinestore.model.ProductQuantity;
 import sda.store.onlinestore.model.responseBody.ProductQuantityResponse;
 import sda.store.onlinestore.repository.ProductQuantityRepository;
 import sda.store.onlinestore.repository.ProductRepository;
 
-import javax.transaction.Transactional;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
 @AllArgsConstructor
+@Service
 public class ProductService {
 
     private final ProductRepository productRepository;
@@ -39,8 +30,7 @@ public class ProductService {
         product.setPrice(productDTO.getPrice());
         product.setType(productDTO.getType());
         product.setProductQuantities(productDTO.getProductQuantities());
-        productRepository.save(product);
-        return product;
+        return productRepository.save(product);
     }
 
     public List<Product> getAllProducts() {
@@ -68,8 +58,7 @@ public class ProductService {
         productToUpdate.setPrice(productDTO.getPrice());
         productToUpdate.setType(productDTO.getType());
         productToUpdate.setProductQuantities(productDTO.getProductQuantities());
-        productRepository.save(productToUpdate);
-        return productToUpdate;
+        return productRepository.save(productToUpdate);
     }
 
     public List<ProductQuantityResponse> getAllProductQuantityOnDate(LocalDate date) {
@@ -78,7 +67,6 @@ public class ProductService {
         for (Product product: products) {
             ProductQuantityResponse productQuantityResponse = new ProductQuantityResponse();
             productQuantityResponse.setProduct(product);
-
             Double productQuantity = productQuantityRepository.findProductQuantityById(date, product.getId());
             productQuantityResponse.setQuantity(productQuantity == null ?0 : productQuantity);
             productQuantityResponse.setOnDate(date);
