@@ -1,20 +1,39 @@
+#spring:
+#  h2:
+#    console:
+#      enabled: true
+#      path: /h2
+#  datasource:
+#    url: jdbc:h2:file:~/test
+#    username: sa
+#    password:
+#    driverClassName: org.h2.Driver
+#    initialization-mode: always
+#  jpa:
+#    hibernate:
+#      ddl-auto: create
+#    generate-ddl: true
+#    database-platform: org.hibernate.dialect.H2Dialect
+#server:
+#  port: 8080
+
 spring:
-  h2:
-    console:
-      enabled: true
-      path: /h2
-  datasource:
-    url: jdbc:h2:file:~/test
-    username: sa
-    password:
-    driverClassName: org.h2.Driver
-    initialization-mode: always
   jpa:
-    hibernate:
-      ddl-auto: create
-    generate-ddl: true
-    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        show-sql: true
+        ddl-auto: none
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+  datasource:
+    url:  jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: password
+#    initialization-mode: always
 server:
   port: 8080
+
 
 

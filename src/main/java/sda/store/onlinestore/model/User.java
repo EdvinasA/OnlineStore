@@ -17,7 +17,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Entity(name = "USERS")
+@Entity(name = "STORE_USERS")
 @Data
 @ToString
 public class User {
