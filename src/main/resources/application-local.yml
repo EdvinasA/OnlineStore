@@ -11,5 +11,3 @@ spring:
           lob:
             non_contextual_creation: true
         dialect: org.hibernate.dialect.PostgreSQL95Dialect
-server:
-  port: 8080
