@@ -7,4 +7,7 @@ spring:
   jpa:
     properties:
       hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
         dialect: org.hibernate.dialect.PostgreSQL95Dialect
