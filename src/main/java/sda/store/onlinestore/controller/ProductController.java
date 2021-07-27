@@ -16,7 +16,7 @@ import java.util.List;
 
 
 @RequestMapping(value = "/product")
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+//@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 @RestController
 @AllArgsConstructor
 public class ProductController {
