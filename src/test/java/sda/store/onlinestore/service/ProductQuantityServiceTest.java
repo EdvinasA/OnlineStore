@@ -24,17 +24,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 class ProductQuantityServiceTest extends OnlineStoreApplicationTests {
-
-    @InjectMocks
-    private ProductQuantityService productQuantityService;
-    private ProductService productService;
-
-    @Mock
-    private ProductQuantityRepository productQuantityRepository;
-    private ProductRepository productRepository;
-
-    @Test
-    void postProductQuantity_whenCreatedFindByFirstID() {
+//
+//    @InjectMocks
+//    private ProductQuantityService productQuantityService;
+//    private ProductService productService;
+//
+//    @Mock
+//    private ProductQuantityRepository productQuantityRepository;
+//    private ProductRepository productRepository;
+//
+//    @Test
+//    void postProductQuantity_whenCreatedFindByFirstID() {
 //        Product product = new Product();
 //        product.setTitle("Computer");
 //        productRepository.save(product);
@@ -49,17 +49,17 @@ class ProductQuantityServiceTest extends OnlineStoreApplicationTests {
 //        ProductQuantity foundProductQuantity = productQuantityService.getProductQuantityById(1L);
 //
 //        assertThat(foundProductQuantity).isEqualTo(productQuantity);
-    }
-
-    @Test
-    void getAllProductQuantity() {
-    }
-
-    @Test
-    void getProductQuantityById() {
-    }
-
-    @Test
-    void getQuantityByProductIdOnDate() {
-    }
+//    }
+//
+//    @Test
+//    void getAllProductQuantity() {
+//    }
+//
+//    @Test
+//    void getProductQuantityById() {
+//    }
+//
+//    @Test
+//    void getQuantityByProductIdOnDate() {
+//    }
 }
