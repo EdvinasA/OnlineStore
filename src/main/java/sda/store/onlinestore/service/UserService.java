@@ -9,6 +9,7 @@ import sda.store.onlinestore.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 @Service
 @AllArgsConstructor
@@ -23,18 +24,18 @@ public class UserService {
     }
 
     public User registerNewUser (UserDTO userDTO) {
-        Optional<User> userOpt = Optional.ofNullable(userRepository.findUserByUserNameIgnoreCase(userDTO.getUserName()));
-        User user1 = new User();
-        if (userOpt.isPresent()) {
+        User userOpt = userRepository.findUserByUserNameIgnoreCase(userDTO.getUserName());
+        if (userOpt != null) {
             return null;
-        } else
+        }
+        User user1 = new User();
         user1.setFirstName(userDTO.getFirstName());
         user1.setLastName(userDTO.getLastName());
         user1.setAge(userDTO.getAge());
         user1.setEmail(userDTO.getEmail());
         user1.setUserName(userDTO.getUserName());
         user1.setPassword(userDTO.getPassword());
-        user1.setRole("USER");
+        user1.setRole(userDTO.getRole());
         return userRepository.save(user1);
     }
 

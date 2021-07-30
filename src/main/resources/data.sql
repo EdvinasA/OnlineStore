@@ -1,4 +1,4 @@
---
+
 -- insert into PRODUCT (ID, TITLE, IMAGE_URL , DESCRIPTION, PRICE, TYPE)
 --
 -- VALUES (1, 'Dell XP 15266','assets/images/unnamed1.png', '512 SSD PCIe  USB 3.2  Thunderbolt WiFi 802.11AX', 966.66, 'COMPUTER'),

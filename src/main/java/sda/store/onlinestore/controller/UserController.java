@@ -13,7 +13,7 @@ import java.util.Base64;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+@CrossOrigin(origins = {"http://localhost:4200", "https://digitalists.herokuapp.com"}, allowedHeaders = "*")
 @AllArgsConstructor
 public class UserController {
 

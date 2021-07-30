@@ -1,7 +1,6 @@
 package sda.store.onlinestore.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sda.store.onlinestore.model.PurchaseOrderLine;
 import sda.store.onlinestore.model.PurchaseOrderLineDTO;
@@ -13,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/purchase/order")
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+@CrossOrigin(origins = {"http://localhost:4200", "https://digitalists.herokuapp.com"}, allowedHeaders = "*")
 @AllArgsConstructor
 public class PurchaseOrderLineController {
 
