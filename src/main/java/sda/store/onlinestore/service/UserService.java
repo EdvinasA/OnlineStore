@@ -25,7 +25,7 @@ public class UserService {
     public User registerNewUser (UserDTO userDTO) {
         Optional<User> userOpt = Optional.ofNullable(userRepository.findUserByUserNameIgnoreCase(userDTO.getUserName()));
         User user1 = new User();
-        if (userOpt.isPresent()) {
+        if (userOpt.get().getUserName().equals(userDTO.getUserName()) || userOpt.get().getEmail().equals(userDTO.getEmail())) {
             return null;
         } else
         user1.setFirstName(userDTO.getFirstName());
