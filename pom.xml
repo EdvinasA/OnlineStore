@@ -107,20 +107,6 @@
                     </archive>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>com.heroku.sdk</groupId>
-                <artifactId>heroku-maven-plugin</artifactId>
-                <version>3.0.4</version>
-                <configuration>
-                    <jdkVersion>1.8</jdkVersion>
-                    <!-- Use your own application name >>> heroku enforces lowcase names -->
-                    <appName>stocknews</appName>
-                    <processTypes>
-                        <!-- Tell Heroku how to launch your application -->
-                        <web>java -Dserver.port=$PORT $JAVA_OPTS -jar target/online-store-0.0.1-SNAPSHOT.jar -cp target/classes:target/dependency/*</web>
-                    </processTypes>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
