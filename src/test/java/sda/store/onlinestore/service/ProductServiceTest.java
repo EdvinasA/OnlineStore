@@ -28,20 +28,20 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class ProductServiceTest extends OnlineStoreApplicationTests {
-
-    @Mock
-    private ProductRepository productRepository;
-
-    @Mock
-    private ProductQuantityRepository productQuantityRepository;
-
-    @InjectMocks
-    private ProductService productService;
-
-    @BeforeEach
-    void setUp() {
-        productService = new ProductService(productRepository, productQuantityRepository);
-    }
+//
+//    @Mock
+//    private ProductRepository productRepository;
+//
+//    @Mock
+//    private ProductQuantityRepository productQuantityRepository;
+//
+//    @InjectMocks
+//    private ProductService productService;
+//
+//    @BeforeEach
+//    void setUp() {
+//        productService = new ProductService(productRepository, productQuantityRepository);
+//    }
 
 //     @Test
 //     void whenRegisteredNewProduct() {
@@ -74,13 +74,13 @@ class ProductServiceTest extends OnlineStoreApplicationTests {
 //     }
 
 
-    @Test
-    void canGetAllProducts() {
-        // when
-        productService.getAllProducts();
-        //then
-        verify(productRepository).findAll();
-    }
+//    @Test
+//    void canGetAllProducts() {
+//        // when
+//        productService.getAllProducts();
+//        //then
+//        verify(productRepository).findAll();
+//    }
 
 //    @Test
 //    void getProductById() {
