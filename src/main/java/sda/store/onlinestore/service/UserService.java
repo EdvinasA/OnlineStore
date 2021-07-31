@@ -8,8 +8,6 @@ import sda.store.onlinestore.model.UserForLogin;
 import sda.store.onlinestore.repository.UserRepository;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Supplier;
 
 @Service
 @AllArgsConstructor
