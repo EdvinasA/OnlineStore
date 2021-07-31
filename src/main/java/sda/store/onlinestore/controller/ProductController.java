@@ -40,11 +40,11 @@ public class ProductController {
         return productService.getAllProductQuantityOnDate(date);
     }
 
-    @GetMapping(value = "/{id}/quantity")
+    @GetMapping(value = "/{productId}/quantity")
     public double getQuantityByProductIdOnDate(@RequestParam("date")
-                                                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
-                                                                Long productId){
-        return productService.getQuantityByProductIdOnDate(date, productId);
+                                               @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+                                                @PathVariable String productId){
+        return productService.getQuantityByProductIdOnDate(date, Long.parseLong(productId));
     }
 
     @DeleteMapping(path = "/delete/{id}")
