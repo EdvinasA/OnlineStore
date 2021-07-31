@@ -102,7 +102,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.mypackage.MyClass</mainClass>
+                            <mainClass>sda.store.onlinestore.OnlineStoreApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
