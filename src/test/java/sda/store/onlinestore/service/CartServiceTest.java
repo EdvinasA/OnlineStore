@@ -36,7 +36,7 @@ class CartServiceTest extends OnlineStoreApplicationTests {
     private UserRepository userRepository;
 
     @InjectMocks
-    private CartService cartService = new CartService(this.cartRepository, this.productRepository, this.userRepository);
+    private final CartService cartService = new CartService(this.cartRepository, this.productRepository, this.userRepository);
 
 //    @Test
 //    void when_addProductToCart_it_should_return_cart() {
