@@ -60,4 +60,8 @@ public class UserService {
     public List<User> findAllUsers(){
         return userRepository.findAll();
     }
+
+    public void deleteUserById(String userId) {
+        userRepository.deleteById(Long.parseLong(userId));
+    }
 }

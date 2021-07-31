@@ -52,4 +52,9 @@ public class UserController {
         return () ->  new String(Base64.getDecoder()
                 .decode(authToken)).split(":")[0];
     }
+
+    @DeleteMapping("/user/delete/{userId}")
+    public void deleteUserById(@PathVariable String userId) {
+        userService.deleteUserById(userId);
+    }
 }
