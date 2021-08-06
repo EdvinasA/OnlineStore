@@ -1,11 +1,12 @@
 package sda.store.onlinestore.service;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import sda.store.onlinestore.OnlineStoreApplicationTests;
 import sda.store.onlinestore.model.Product;
 import sda.store.onlinestore.model.ProductDTO;
@@ -22,8 +23,9 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(MockitoExtension.class)
 class ProductQuantityServiceTest extends OnlineStoreApplicationTests {
+
 //
 //    @InjectMocks
 //    private ProductQuantityService productQuantityService;
@@ -51,9 +53,9 @@ class ProductQuantityServiceTest extends OnlineStoreApplicationTests {
 //        assertThat(foundProductQuantity).isEqualTo(productQuantity);
 //    }
 //
-//    @Test
-//    void getAllProductQuantity() {
-//    }
+    @Test
+    void getAllProductQuantity() {
+    }
 //
 //    @Test
 //    void getProductQuantityById() {
