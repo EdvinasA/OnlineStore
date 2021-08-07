@@ -3,6 +3,7 @@ package sda.store.onlinestore.service;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
@@ -36,7 +37,7 @@ class CartServiceTest extends OnlineStoreApplicationTests {
     private UserRepository userRepository;
 
     @InjectMocks
-    private CartService cartService = new CartService(this.cartRepository, this.productRepository, this.userRepository);
+    private final CartService cartService = new CartService(this.cartRepository, this.productRepository, this.userRepository);
 
     @Test
     @Disabled
@@ -51,6 +52,9 @@ class CartServiceTest extends OnlineStoreApplicationTests {
         user.setPassword("user");
         user.setEmail("user@gmail.com");
         user.setRole("USER");
+
+        userRepository.save(user);
+        doReturn(user).when(cartService.getAllCartByUserId(user.getId()));
 
         Product product = new Product();
         product.setId(3L);
@@ -72,16 +76,19 @@ class CartServiceTest extends OnlineStoreApplicationTests {
 
         List<Cart> expectedProducts = Collections.singletonList(cart);
 
-        doReturn(expectedProducts).when(cartRepository).findAllByUser(user);
-
         // when
 
-        List<Cart> actualProducts = Collections.singletonList(cart);
-        when(cartService.addProductToCart(any(CartDTO.class), user.getId().toString())).thenReturn(cart);
+        cartService.addProductToCart(cartDTO, user.getId());
 
         // then
 
-        assertThat(actualProducts).isEqualTo(expectedProducts);
+        ArgumentCaptor<Cart> cartArgumentCaptor = ArgumentCaptor.forClass(Cart.class);
+
+        verify(cartRepository).save(cartArgumentCaptor.capture());
+
+        Cart capturedCart = cartArgumentCaptor.getValue();
+
+        assertThat(capturedCart).isEqualTo(cart);
     }
 
 //    @Test

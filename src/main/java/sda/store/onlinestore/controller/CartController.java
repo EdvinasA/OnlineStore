@@ -22,7 +22,7 @@ public class CartController {
 
     @PostMapping(value = "/{userId}")
     public Cart addProductToCart(@Valid @RequestBody CartDTO cartDTO, @PathVariable String userId){
-        return cartService.addProductToCart(cartDTO, userId);
+        return cartService.addProductToCart(cartDTO, Long.parseLong(userId));
     }
 
     @GetMapping(value = "/{userId}")
@@ -30,12 +30,12 @@ public class CartController {
         if (userId.equals("null")) {
             return null;
         }
-        return cartService.getAllCartByUserId(userId);
+        return cartService.getAllCartByUserId(Long.parseLong(userId));
     }
 
     @GetMapping(value = "/getTotalPrice/{userId}")
     public Double getTotalPrice(@PathVariable String userId) {
-        return cartService.getTotalPriceByUserId(userId);
+        return cartService.getTotalPriceByUserId(Long.parseLong(userId));
     }
 
     @DeleteMapping(path = "/{id}")
