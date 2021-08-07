@@ -1,15 +1,13 @@
 package sda.store.onlinestore.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sda.store.onlinestore.model.User;
 import sda.store.onlinestore.model.UserDTO;
 import sda.store.onlinestore.model.UserForLogin;
 import sda.store.onlinestore.service.UserService;
 
-import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
-import java.util.Base64;
 import java.util.List;
 
 @RestController
@@ -45,11 +43,10 @@ public class UserController {
         return userService.findAllUsers();
     }
 
-    @GetMapping("/user")
-    public Principal user(HttpServletRequest request) {
-        String authToken = request.getHeader("Authorization")
-                .substring("Basic".length()).trim();
-        return () ->  new String(Base64.getDecoder()
-                .decode(authToken)).split(":")[0];
+    @DeleteMapping(path = "/user/{userId}")
+    public ResponseEntity<Void> deleteCartProductById(@PathVariable Long userId) {
+        System.out.println(userId);
+            userService.deleteUserById(userId);
+            return ResponseEntity.ok().build();
     }
 }
