@@ -2,8 +2,7 @@ package sda.store.onlinestore.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
-import sda.store.onlinestore.exceptions.NotFoundException;
+import sda.store.onlinestore.exceptions.FoundException;
 import sda.store.onlinestore.model.User;
 import sda.store.onlinestore.model.UserDTO;
 import sda.store.onlinestore.model.UserForLogin;
@@ -27,17 +26,17 @@ public class UserService {
     public User registerNewUser (UserDTO userDTO) {
         User userOpt = userRepository.findUserByUserNameIgnoreCase(userDTO.getUserName());
         if (userOpt != null) {
-            throw new NotFoundException("User Found");
+            throw new FoundException("User Found");
         }
-        User user1 = new User();
-        user1.setFirstName(userDTO.getFirstName());
-        user1.setLastName(userDTO.getLastName());
-        user1.setAge(userDTO.getAge());
-        user1.setEmail(userDTO.getEmail());
-        user1.setUserName(userDTO.getUserName());
-        user1.setPassword(userDTO.getPassword());
-        user1.setRole(userDTO.getRole());
-        return userRepository.save(user1);
+        User user = new User();
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setAge(userDTO.getAge());
+        user.setEmail(userDTO.getEmail());
+        user.setUserName(userDTO.getUserName());
+        user.setPassword(userDTO.getPassword());
+        user.setRole(userDTO.getRole());
+        return userRepository.save(user);
     }
 
     public User registerNewAdmin (UserDTO userDTO) {

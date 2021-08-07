@@ -6,7 +6,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import sda.store.onlinestore.exceptions.FoundException;
 import sda.store.onlinestore.model.User;
+import sda.store.onlinestore.model.UserDTO;
 import sda.store.onlinestore.model.UserForLogin;
 import sda.store.onlinestore.repository.UserRepository;
 
@@ -64,8 +66,23 @@ class UserServiceTest {
     }
 
     @Test
-    @Disabled
-    void registerNewUser() {
+    void registerNewUser_ThrowsFoundException_BecauseUserExists() {
+        UserDTO user = new UserDTO();
+        user.setFirstName("user");
+        user.setLastName("user");
+        user.setAge(22);
+        user.setUserName("user");
+        user.setPassword("user");
+        user.setEmail("user@gmail.com");
+        user.setRole("USER");
+
+        given(userRepository.findUserByUserNameIgnoreCase("user"))
+                .willThrow(FoundException.class);
+
+        //when
+        //then
+        assertThatThrownBy(() -> userService.registerNewUser(user))
+                .isInstanceOf(FoundException.class);
     }
 
     @Test
