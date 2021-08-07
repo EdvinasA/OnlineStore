@@ -9,7 +9,7 @@ import sda.store.onlinestore.OnlineStoreApplicationTests;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-class ProductRepositoryTest extends OnlineStoreApplicationTests {
+class ProductRepositoryTest {
 
     @Test
     @Disabled

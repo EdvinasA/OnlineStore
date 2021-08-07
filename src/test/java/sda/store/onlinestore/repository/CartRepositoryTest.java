@@ -15,11 +15,10 @@ import sda.store.onlinestore.service.UserService;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doReturn;
 
 @ExtendWith(MockitoExtension.class)
-class CartRepositoryTest extends OnlineStoreApplicationTests {
+class CartRepositoryTest {
 
     @Mock
     private UserRepository userRepository;

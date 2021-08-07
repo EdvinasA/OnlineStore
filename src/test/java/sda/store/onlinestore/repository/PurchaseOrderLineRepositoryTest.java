@@ -7,7 +7,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import sda.store.onlinestore.OnlineStoreApplicationTests;
 
 @ExtendWith(MockitoExtension.class)
-class PurchaseOrderLineRepositoryTest extends OnlineStoreApplicationTests {
+class PurchaseOrderLineRepositoryTest{
 
     @Test
     @Disabled
