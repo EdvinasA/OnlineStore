@@ -1,6 +1,5 @@
 package sda.store.onlinestore.service;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -12,6 +11,9 @@ import sda.store.onlinestore.model.User;
 import sda.store.onlinestore.model.UserDTO;
 import sda.store.onlinestore.model.UserForLogin;
 import sda.store.onlinestore.repository.UserRepository;
+
+import java.util.Collections;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -117,12 +119,39 @@ class UserServiceTest {
         User capturedUser = userArgumentCaptor.getValue();
 
         assertThat(capturedUser).isEqualTo(userCheck);
-
     }
 
     @Test
-    @Disabled
     void registerNewAdmin() {
+        UserDTO user = new UserDTO();
+        user.setFirstName("user");
+        user.setLastName("user");
+        user.setAge(22);
+        user.setUserName("user");
+        user.setPassword("user");
+        user.setEmail("user@gmail.com");
+        user.setRole("USER");
+
+        User userCheck = new User();
+        userCheck.setFirstName("user");
+        userCheck.setLastName("user");
+        userCheck.setAge(22);
+        userCheck.setUserName("user");
+        userCheck.setPassword("user");
+        userCheck.setEmail("user@gmail.com");
+        userCheck.setRole("USER");
+
+        //when
+        userService.registerNewAdmin(user);
+
+        //then
+        ArgumentCaptor<User> userArgumentCaptor = ArgumentCaptor.forClass(User.class);
+
+        verify(userRepository).save(userArgumentCaptor.capture());
+
+        User capturedUser = userArgumentCaptor.getValue();
+
+        assertThat(capturedUser).isEqualTo(userCheck);
     }
 
     @Test
@@ -149,8 +178,23 @@ class UserServiceTest {
 
     @Test
     void findAllUsers() {
-        userRepository.findAll();
+        //given
+        User user = new User();
+        user.setFirstName("user");
+        user.setLastName("user");
+        user.setAge(22);
+        user.setUserName("user");
+        user.setPassword("user");
+        user.setEmail("user@gmail.com");
+        user.setRole("USER");
 
-        verify(userRepository).findAll();
+        List<User> expectedUsers = Collections.singletonList(user);
+
+        //when
+        when(userRepository.findAll()).thenReturn(expectedUsers);
+        List<User> users = userRepository.findAll();
+
+        //then
+        assertThat(users).isEqualTo(expectedUsers);
     }
 }
