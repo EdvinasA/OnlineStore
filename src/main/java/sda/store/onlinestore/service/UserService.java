@@ -2,12 +2,15 @@ package sda.store.onlinestore.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
+import sda.store.onlinestore.exceptions.NotFoundException;
 import sda.store.onlinestore.model.User;
 import sda.store.onlinestore.model.UserDTO;
 import sda.store.onlinestore.model.UserForLogin;
 import sda.store.onlinestore.repository.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -16,15 +19,15 @@ public class UserService {
     private final UserRepository userRepository;
 
     public boolean loginByUserNameAndPassword(UserForLogin userDTO) {
-
-        User user = userRepository.findUserByUserNameAndPasswordIgnoreCase(userDTO.getUserName(), userDTO.getPassword());
+        Optional<User> userOptional = Optional.ofNullable(userRepository.findUserByUserNameAndPasswordIgnoreCase(userDTO.getUserName(), userDTO.getPassword()));
+        User user = userOptional.orElseThrow(() -> new RuntimeException("User was not found"));
         return user.getUserName().equals(userDTO.getUserName()) && user.getPassword().equals(userDTO.getPassword());
     }
 
     public User registerNewUser (UserDTO userDTO) {
         User userOpt = userRepository.findUserByUserNameIgnoreCase(userDTO.getUserName());
         if (userOpt != null) {
-            return null;
+            throw new NotFoundException("User Found");
         }
         User user1 = new User();
         user1.setFirstName(userDTO.getFirstName());
@@ -50,7 +53,6 @@ public class UserService {
     }
 
     public User getLoggedInUserRoleByUserName(String userName) {
-        System.out.println(userName);
         User user = userRepository.findUserByUserNameIgnoreCase(userName);
         return user;
     }
