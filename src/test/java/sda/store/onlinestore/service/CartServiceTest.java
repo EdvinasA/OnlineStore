@@ -1,7 +1,9 @@
 package sda.store.onlinestore.service;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
@@ -10,13 +12,12 @@ import sda.store.onlinestore.OnlineStoreApplicationTests;
 import sda.store.onlinestore.model.Cart;
 import sda.store.onlinestore.model.CartDTO;
 import sda.store.onlinestore.model.Product;
+import sda.store.onlinestore.model.User;
 import sda.store.onlinestore.repository.CartRepository;
 import sda.store.onlinestore.repository.ProductRepository;
 import sda.store.onlinestore.repository.UserRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,45 +26,70 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class CartServiceTest extends OnlineStoreApplicationTests {
-//
-//    @Mock
-//    private CartRepository cartRepository;
-//
-//    @Mock
-//    private ProductRepository productRepository;
-//
-//    @Mock
-//    private UserRepository userRepository;
-//
-//    @InjectMocks
-//    private CartService cartService = new CartService(this.cartRepository, this.productRepository, this.userRepository);
 
-//    @Test
-//    void when_addProductToCart_it_should_return_cart() {
-//        Product product = new Product();
-//        product.setId(3L);
-//        product.setTitle("Disc");
-//        product.setDescription("Large disc");
-//        product.setPrice(50.99);
-//        product.setImageUrl("");
-//        product.setType("Computer");
-//
-//        CartDTO cartDTO = new CartDTO();
-//        cartDTO.setProductId(3L);
-//        cartDTO.setQuantity(3.0);
-//
-//        Cart cart = new Cart();
-//        cart.setId(3L);
-//        cart.setProduct(product);
-//        cart.setQuantity(3.0);
-//
-//        when(productRepository.findById(anyLong())).thenReturn(Optional.of(product));
-//        when(cartRepository.save(any(Cart.class))).thenReturn(cart);
-//
-//        Cart created = cartService.addProductToCart(cartDTO);
-//
-//        assertThat(created).isSameAs(cart);
-//    }
+    @Mock
+    private CartRepository cartRepository;
+
+    @Mock
+    private ProductRepository productRepository;
+
+    @Mock
+    private UserRepository userRepository;
+
+    @InjectMocks
+    private final CartService cartService = new CartService(this.cartRepository, this.productRepository, this.userRepository);
+
+    @Test
+    @Disabled
+    void when_addProductToCart_it_should_return_cart() {
+        // given
+        User user = new User();
+        user.setId(1L);
+        user.setFirstName("user");
+        user.setLastName("user");
+        user.setAge(22);
+        user.setUserName("user");
+        user.setPassword("user");
+        user.setEmail("user@gmail.com");
+        user.setRole("USER");
+
+        userRepository.save(user);
+        doReturn(user).when(cartService.getAllCartByUserId(user.getId()));
+
+        Product product = new Product();
+        product.setId(3L);
+        product.setTitle("Disc");
+        product.setDescription("Large disc");
+        product.setPrice(50.99);
+        product.setImageUrl("");
+        product.setType("Computer");
+
+        CartDTO cartDTO = new CartDTO();
+        cartDTO.setProductId(3L);
+        cartDTO.setQuantity(3.0);
+
+        Cart cart = new Cart();
+        cart.setId(1L);
+        cart.setProduct(product);
+        cart.setQuantity(3.0);
+        cart.setUser(user);
+
+        List<Cart> expectedProducts = Collections.singletonList(cart);
+
+        // when
+
+        cartService.addProductToCart(cartDTO, user.getId());
+
+        // then
+
+        ArgumentCaptor<Cart> cartArgumentCaptor = ArgumentCaptor.forClass(Cart.class);
+
+        verify(cartRepository).save(cartArgumentCaptor.capture());
+
+        Cart capturedCart = cartArgumentCaptor.getValue();
+
+        assertThat(capturedCart).isEqualTo(cart);
+    }
 
 //    @Test
 //    void given_new_product_return_false() {

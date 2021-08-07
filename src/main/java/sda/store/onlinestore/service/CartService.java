@@ -18,13 +18,13 @@ public class CartService {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
 
-    public Cart addProductToCart(CartDTO cartDTO, String userId) {
-        if (checkIfProductExists(cartDTO)) {
+    public Cart addProductToCart(CartDTO cartDTO, Long userId) {
+        if (checkIfProductExists(cartDTO, userId)) {
             return null;
         }
         else {
         Cart cart = new Cart();
-        Optional<User> userOpt = userRepository.findById(Long.parseLong(userId));
+        Optional<User> userOpt = userRepository.findById(userId);
         User user = userOpt.orElseThrow(() -> new RuntimeException("User was not found"));
         Optional<Product> productOpt = productRepository.findById(cartDTO.getProductId());
         Product product = productOpt.orElseThrow(() -> new RuntimeException("Product was not found"));
@@ -46,8 +46,8 @@ public class CartService {
         return cartRepository.save(cartProductToUpdate);
     }
 
-    public boolean checkIfProductExists(CartDTO cartDTO) {
-        List<Cart> allProductsInCart = getAllCart();
+    public boolean checkIfProductExists(CartDTO cartDTO, Long userId) {
+        List<Cart> allProductsInCart = getAllCartByUserId(userId);
         for (Cart cart: allProductsInCart) {
             if (cart.getProduct().getId().equals(cartDTO.getProductId())) {
                 cart.setQuantity(cart.getQuantity() + 1);
@@ -62,12 +62,8 @@ public class CartService {
         cartRepository.deleteById(id);
     }
 
-    public List<Cart> getAllCart() {
-        return cartRepository.findAll();
-    }
-
-    public List<Cart> getAllCartByUserId(String userId) {
-        Optional<User> userOpt = userRepository.findById(Long.parseLong(userId));
+    public List<Cart> getAllCartByUserId(Long userId) {
+        Optional<User> userOpt = userRepository.findById(userId);
         User user = userOpt.orElseThrow(() -> new RuntimeException("User was not found"));
         return cartRepository.findAllByUser(user);
     }
@@ -81,7 +77,7 @@ public class CartService {
         return cartOpt.orElseThrow(() -> new RuntimeException("Cart entry was nor found"));
     }
 
-    public Double getTotalPriceByUserId(String userId) {
+    public Double getTotalPriceByUserId(Long userId) {
         double sum = 0;
         List<Cart> allProducts;
         allProducts = getAllCartByUserId(userId);
