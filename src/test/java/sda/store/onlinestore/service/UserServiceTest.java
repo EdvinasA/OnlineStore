@@ -142,7 +142,7 @@ class UserServiceTest {
         userCheck.setRole("USER");
 
         //when
-        userService.registerNewUser(user);
+        userService.registerNewAdmin(user);
 
         //then
         ArgumentCaptor<User> userArgumentCaptor = ArgumentCaptor.forClass(User.class);

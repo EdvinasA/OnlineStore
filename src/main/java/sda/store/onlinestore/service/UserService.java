@@ -52,8 +52,7 @@ public class UserService {
     }
 
     public User getLoggedInUserRoleByUserName(String userName) {
-        return userRepository.findUserByUserNameIgnoreCase(userName);
-    }
+        return userRepository.findUserByUserNameIgnoreCase(userName); }
 
     public List<User> findAllUsers(){
         return userRepository.findAll();
