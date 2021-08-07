@@ -20,8 +20,6 @@ import sda.store.onlinestore.repository.UserRepository;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -37,7 +35,7 @@ class CartServiceTest extends OnlineStoreApplicationTests {
     private UserRepository userRepository;
 
     @InjectMocks
-    private final CartService cartService = new CartService(this.cartRepository, this.productRepository, this.userRepository);
+    private CartService cartService;
 
     @Test
     @Disabled
