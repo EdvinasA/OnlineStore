@@ -3,6 +3,7 @@ package sda.store.onlinestore.service;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -83,6 +84,40 @@ class UserServiceTest {
         //then
         assertThatThrownBy(() -> userService.registerNewUser(user))
                 .isInstanceOf(FoundException.class);
+    }
+
+    @Test
+    void registerNewUser() {
+        UserDTO user = new UserDTO();
+        user.setFirstName("user");
+        user.setLastName("user");
+        user.setAge(22);
+        user.setUserName("user");
+        user.setPassword("user");
+        user.setEmail("user@gmail.com");
+        user.setRole("USER");
+
+        User userCheck = new User();
+        userCheck.setFirstName("user");
+        userCheck.setLastName("user");
+        userCheck.setAge(22);
+        userCheck.setUserName("user");
+        userCheck.setPassword("user");
+        userCheck.setEmail("user@gmail.com");
+        userCheck.setRole("USER");
+
+        //when
+        userService.registerNewUser(user);
+
+        //then
+        ArgumentCaptor<User> userArgumentCaptor = ArgumentCaptor.forClass(User.class);
+
+        verify(userRepository).save(userArgumentCaptor.capture());
+
+        User capturedUser = userArgumentCaptor.getValue();
+
+        assertThat(capturedUser).isEqualTo(userCheck);
+
     }
 
     @Test
