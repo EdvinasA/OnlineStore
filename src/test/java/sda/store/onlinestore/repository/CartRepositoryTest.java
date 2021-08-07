@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import sda.store.onlinestore.OnlineStoreApplicationTests;
 import sda.store.onlinestore.model.Cart;
 import sda.store.onlinestore.model.Product;
 import sda.store.onlinestore.model.User;
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doReturn;
 
 @ExtendWith(MockitoExtension.class)
-class CartRepositoryTest {
+class CartRepositoryTest extends OnlineStoreApplicationTests {
 
     @Mock
     private UserRepository userRepository;
