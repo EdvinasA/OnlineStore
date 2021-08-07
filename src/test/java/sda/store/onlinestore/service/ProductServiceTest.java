@@ -16,8 +16,6 @@ import sda.store.onlinestore.repository.ProductQuantityRepository;
 import sda.store.onlinestore.repository.ProductRepository;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -36,38 +34,27 @@ class ProductServiceTest extends OnlineStoreApplicationTests {
     @InjectMocks
     private ProductService productService;
 
-    @BeforeEach
-    void setUp() {
-        productService = new ProductService(productRepository, productQuantityRepository);
-    }
-
      @Test
-     @Disabled
      void whenRegisteredNewProduct() {
          //given
          ProductDTO product = new ProductDTO();
          product.setTitle("product");
 
          Product expectedProduct = new Product();
-         expectedProduct.setId(1L);
          expectedProduct.setTitle("product");
          expectedProduct.setImageUrl("assets/images/null");
-         List<Product> expectedProducts = Collections.singletonList(expectedProduct);
 
          //when
          productService.newProductRegistration(product);
 
          //then
          ArgumentCaptor<Product> productArgumentCaptor = ArgumentCaptor.forClass(Product.class);
-         when(productService.getAllProducts()).thenReturn(expectedProducts);
 
          verify(productRepository).save(productArgumentCaptor.capture());
 
          Product capturedProduct = productArgumentCaptor.getValue();
-         capturedProduct.setId(1L);
-         List<Product> capturedProducts = Collections.singletonList(capturedProduct);
 
-         assertThat(capturedProducts).isEqualTo(expectedProducts);
+         assertThat(capturedProduct).isEqualTo(expectedProduct);
      }
 
 
