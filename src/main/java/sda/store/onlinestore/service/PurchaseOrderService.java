@@ -1,7 +1,6 @@
 package sda.store.onlinestore.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sda.store.onlinestore.model.PurchaseOrder;
 import sda.store.onlinestore.model.PurchaseOrderDTO;
@@ -20,7 +19,6 @@ public class PurchaseOrderService {
     private final PurchaseOrderRepository purchaseOrderRepository;
     private final UserRepository userRepository;
 
-
     public PurchaseOrder createPurchaseOrder(PurchaseOrderDTO purchaseOrderDTO, String userId) {
         PurchaseOrder purchaseOrder = new PurchaseOrder();
         Optional<User> userOpt = userRepository.findById(Long.parseLong(userId));
@@ -32,10 +30,6 @@ public class PurchaseOrderService {
         purchaseOrder.setUser(user);
         purchaseOrderRepository.save(purchaseOrder);
         return purchaseOrder;
-    }
-
-    public List<PurchaseOrder> getAllPurchaseOrder() {
-        return purchaseOrderRepository.findAll();
     }
 
     public List<PurchaseOrder> getAllPurchaseOrderByUserId(String userId) {

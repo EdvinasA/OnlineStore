@@ -2,6 +2,7 @@
 -- DROP TABLE IF EXISTS PURCHASE_ORDER_LINE;
 -- DROP TABLE IF EXISTS CART;
 -- DROP TABLE IF EXISTS PURCHASE_ORDER;
+-- DROP TABLE IF EXISTS STORE_USERS;
 --
 -- CREATE TABLE CART (
 --     ID serial PRIMARY KEY ,
@@ -32,7 +33,8 @@
 --                          PASSWORD varchar(255) DEFAULT NULL,
 --                          ROLE varchar(255) DEFAULT NULL,
 --                          PRODUCT_ORDER_ID integer DEFAULT NULL,
---                          CART_ID integer DEFAULT NULL
+--                          CART_ID integer DEFAULT NULL,
+--                          PRODUCT_ORDER_LINE_ID integer DEFAULT NULL
 -- );
 --
 -- CREATE TABLE PRODUCT_QUANTITY (
@@ -46,7 +48,8 @@
 --                          ID serial PRIMARY KEY ,
 --                          QUANTITY integer DEFAULT NULL,
 --                          PURCHASE_ORDER_ID integer DEFAULT NULL,
---                          PRODUCT_ID integer DEFAULT NULL
+--                          PRODUCT_ID integer DEFAULT NULL,
+--                          STORE_USERS_ID integer DEFAULT NULL
 -- );
 --
 -- CREATE TABLE PURCHASE_ORDER (

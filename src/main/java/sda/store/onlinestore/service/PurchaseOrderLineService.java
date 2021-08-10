@@ -14,42 +14,45 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class PurchaseOrderLineService {
-    private PurchaseOrderRepository purchaseOrderRepository;
-    private PurchaseOrderLineRepository purchaseOrderLineRepository;
-    private ProductRepository productRepository;
-    private CartRepository cartRepository;
-    private ProductQuantityRepository productQuantityRepository;
+
+    private final PurchaseOrderRepository purchaseOrderRepository;
+    private final PurchaseOrderLineRepository purchaseOrderLineRepository;
+    private final ProductRepository productRepository;
+    private final CartRepository cartRepository;
+    private final ProductQuantityRepository productQuantityRepository;
+    private final UserRepository userRepository;
 
     public PurchaseOrderLine addProductToPurchaseOrderLine(PurchaseOrderLineDTO purchaseOrderLineDTO) {
         PurchaseOrderLine purchaseOrderLine = new PurchaseOrderLine();
 
         Optional<PurchaseOrder> purchaseOrderOpt = purchaseOrderRepository.findById(purchaseOrderLineDTO.getPurchaseOrderId());
         PurchaseOrder purchaseOrder = purchaseOrderOpt.orElseThrow(() -> new RuntimeException("Purchase order was not found"));
-        purchaseOrderLine.setPurchaseOrder(purchaseOrder);
-
         Optional<Product> productOpt = productRepository.findById(purchaseOrderLineDTO.getProductId());
         Product product = productOpt.orElseThrow(() -> new RuntimeException("Product was not found"));
-        purchaseOrderLine.setProduct(product);
 
+        purchaseOrderLine.setPurchaseOrder(purchaseOrder);
+        purchaseOrderLine.setProduct(product);
         purchaseOrderLine.setQuantity(purchaseOrderLineDTO.getQuantity());
         purchaseOrderLineRepository.save(purchaseOrderLine);
         return purchaseOrderLine;
     }
 
-    public void performOrderLineCreationActions(Long purchase_order_id){
-        createOrderLinesFromCart(purchase_order_id);
+    public void performOrderLineCreationActions(Long purchase_order_id, Long userId){
+        createOrderLinesFromCartByUserId(purchase_order_id, userId);
 
         Optional<PurchaseOrder> purchaseOrderOpt = purchaseOrderRepository.findById(purchase_order_id);
-        PurchaseOrder purchaseOrder = purchaseOrderOpt.orElseThrow(() ->
-                new RuntimeException("Purchase order was not found ID="+purchase_order_id));
+        PurchaseOrder purchaseOrder = purchaseOrderOpt.orElseThrow(
+                () -> new RuntimeException("Purchase order was not found ID="+purchase_order_id));
 
         reduceProductQuantitiesOnDate(purchaseOrder.getOrderDate());
         clearCart();
     }
 
-    public void createOrderLinesFromCart(Long purchase_order_id) {
-        List<Cart> carts = cartRepository.findAll();
-        List<PurchaseOrderLine> purchaseOrderLines = new ArrayList<>();
+    public void createOrderLinesFromCartByUserId(Long purchase_order_id, Long userId) {
+        Optional<User> userOpt = userRepository.findById(userId);
+        User user = userOpt.orElseThrow(() -> new RuntimeException("User was not found"));
+        List<Cart> carts = cartRepository.findAllByUser(user);
+//        List<PurchaseOrderLine> purchaseOrderLines = new ArrayList<>();
         for (Cart cart: carts) {
             PurchaseOrderLine purchaseOrderLine = new PurchaseOrderLine();
 
@@ -61,7 +64,7 @@ public class PurchaseOrderLineService {
             purchaseOrderLine.setQuantity(cart.getQuantity());
 
             purchaseOrderLineRepository.save(purchaseOrderLine);
-            purchaseOrderLines.add(purchaseOrderLine);
+//            purchaseOrderLines.add(purchaseOrderLine);
         }
     }
 
@@ -83,18 +86,6 @@ public class PurchaseOrderLineService {
 
     public List<PurchaseOrderLine> getAllPurchaseOrderLineByOrderId(Long id) {
         return purchaseOrderLineRepository.findPurchaseOrderLineByPurchaseOrderId(id);
-    }
-
-    public List<PurchaseOrderTotalCostResponse> getAllPurchaseOrdersCost() {
-        List<PurchaseOrderTotalCostResponse> purchaseOrderTotalCostResponses = new ArrayList<>();
-        List<PurchaseOrder> purchaseOrders = purchaseOrderRepository.findAll();
-        for (PurchaseOrder purchaseOrder: purchaseOrders) {
-            PurchaseOrderTotalCostResponse purchaseOrderTotalCostResponse = new PurchaseOrderTotalCostResponse();
-            purchaseOrderTotalCostResponse.setPurchaseOrder(purchaseOrder);
-            purchaseOrderTotalCostResponse.setTotalCost(getPurchaseOrderCostByOrderId(purchaseOrder.getId()));
-            purchaseOrderTotalCostResponses.add(purchaseOrderTotalCostResponse);
-        }
-        return purchaseOrderTotalCostResponses;
     }
 
     public List<PurchaseOrderTotalCostResponse> getAllPurchaseOrdersCostByUserId(String userId) {
