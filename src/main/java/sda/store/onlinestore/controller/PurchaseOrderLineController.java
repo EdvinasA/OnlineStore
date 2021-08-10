@@ -23,10 +23,10 @@ public class PurchaseOrderLineController {
         return purchaseOrderLineService.addProductToPurchaseOrderLine(purchaseOrderLineDTO);
     }
 
-    @PostMapping(value = "/lines/moveFromCart")
-    public List<PurchaseOrderLine> createOrderLinesFromCart(@RequestParam Long purchase_order_id){
-        purchaseOrderLineService.performOrderLineCreationActions(purchase_order_id);
-        return purchaseOrderLineService.getAllPurchaseOrderLineByOrderId(purchase_order_id);
+    @PostMapping(value = "/lines/{userId}")
+    public List<PurchaseOrderLine> createOrderLinesFromCart(@RequestBody String purchase_order_id, @PathVariable String userId){
+        purchaseOrderLineService.performOrderLineCreationActions(Long.parseLong(purchase_order_id), Long.parseLong(userId));
+        return purchaseOrderLineService.getAllPurchaseOrderLineByOrderId(Long.parseLong(purchase_order_id));
     }
 
     @GetMapping(value = "{id}/lines")

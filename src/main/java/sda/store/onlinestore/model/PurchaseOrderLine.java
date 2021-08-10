@@ -28,6 +28,9 @@ public class PurchaseOrderLine {
     //@Min(value = 0, message = "Quantity cannot be < 0")
     private Double quantity;
 
+    @ManyToOne
+    private User user;
+
 
 
 
